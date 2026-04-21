@@ -1,9 +1,12 @@
 import { getPool } from './lib/db.js';
 
-export default async function handler(req, res) {
+export const handler = async (event, context) => {
   const pool = getPool();
-  if (req.method !== 'GET') {
-    return res.status(405).json({ message: 'Method not allowed' });
+  if (event.httpMethod !== 'GET') {
+    return {
+      statusCode: 405,
+      body: JSON.stringify({ message: 'Method not allowed' })
+    };
   }
 
   try {
@@ -17,9 +20,15 @@ export default async function handler(req, res) {
       WHERE l.returned = false
       ORDER BY l.due_date ASC
     `);
-    res.status(200).json(result.rows);
+    return {
+      statusCode: 200,
+      body: JSON.stringify(result.rows)
+    };
   } catch (err) {
     console.error(err);
-    res.status(500).json({ message: 'Error fetching report' });
+    return {
+      statusCode: 500,
+      body: JSON.stringify({ message: 'Error fetching report' })
+    };
   }
-}
+};

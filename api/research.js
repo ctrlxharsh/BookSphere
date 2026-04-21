@@ -1,58 +1,83 @@
 import { getPool } from './lib/db.js';
 
-export default async function handler(req, res) {
+export const handler = async (event, context) => {
   const pool = getPool();
-  
-  if (req.method === 'GET') {
+  const method = event.httpMethod;
+
+  if (method === 'GET') {
     try {
-      const { q } = req.query;
+      const { q } = event.queryStringParameters || {};
       let query = 'SELECT * FROM research_materials';
       let params = [];
-      
+
       if (q) {
         query += ' WHERE title ILIKE $1 OR author ILIKE $1 OR description ILIKE $1';
         params = [`%${q}%`];
       }
-      
+
       query += ' ORDER BY created_at DESC';
       const result = await pool.query(query, params);
-      res.status(200).json(result.rows);
+      return {
+        statusCode: 200,
+        body: JSON.stringify(result.rows)
+      };
     } catch (err) {
       console.error(err);
-      res.status(500).json({ message: 'Error fetching research materials' });
+      return {
+        statusCode: 500,
+        body: JSON.stringify({ message: 'Error fetching research materials' })
+      };
     }
-  } else if (req.method === 'POST') {
+  } else if (method === 'POST') {
     try {
-      const { title, author, type, category, description, img_url, external_link } = req.body;
+      const { title, author, type, category, description, img_url, external_link } = JSON.parse(event.body);
       const result = await pool.query(
         'INSERT INTO research_materials (title, author, type, category, description, img_url, external_link) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *',
         [title, author, type, category, description, img_url, external_link]
       );
-      res.status(201).json(result.rows[0]);
+      return {
+        statusCode: 201,
+        body: JSON.stringify(result.rows[0])
+      };
     } catch (err) {
       console.error(err);
-      res.status(500).json({ message: 'Error creating research material' });
+      return {
+        statusCode: 500,
+        body: JSON.stringify({ message: 'Error creating research material' })
+      };
     }
-  } else if (req.method === 'DELETE') {
+  } else if (method === 'DELETE') {
     try {
-      const { id } = req.query;
+      const { id } = event.queryStringParameters || {};
       await pool.query('DELETE FROM research_materials WHERE id = $1', [id]);
-      res.status(200).json({ message: 'Material deleted' });
+      return {
+        statusCode: 200,
+        body: JSON.stringify({ message: 'Material deleted' })
+      };
     } catch (err) {
       console.error(err);
-      res.status(500).json({ message: 'Error deleting material' });
+      return {
+        statusCode: 500,
+        body: JSON.stringify({ message: 'Error deleting material' })
+      };
     }
-  } else if (req.method === 'PUT') {
+  } else if (method === 'PUT') {
     try {
-      const { id, title, author, type, category, description, img_url, external_link, available } = req.body;
+      const { id, title, author, type, category, description, img_url, external_link, available } = JSON.parse(event.body);
       const result = await pool.query(
         'UPDATE research_materials SET title = $1, author = $2, type = $3, category = $4, description = $5, img_url = $6, external_link = $7, available = $8 WHERE id = $9 RETURNING *',
         [title, author, type, category, description, img_url, external_link, available, id]
       );
-      res.status(200).json(result.rows[0]);
+      return {
+        statusCode: 200,
+        body: JSON.stringify(result.rows[0])
+      };
     } catch (err) {
       console.error(err);
-      res.status(500).json({ message: 'Error updating research material' });
+      return {
+        statusCode: 500,
+        body: JSON.stringify({ message: 'Error updating research material' })
+      };
     }
   }
-}
+};

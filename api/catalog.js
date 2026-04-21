@@ -1,6 +1,9 @@
-export default async function handler(req, res) {
-  res.status(200).json({
-    message: 'Catalog endpoint',
-    data: [],
-  });
-}
+export const handler = async (event, context) => {
+  return {
+    statusCode: 200,
+    body: JSON.stringify({
+      message: 'Catalog endpoint',
+      data: [],
+    })
+  };
+};
