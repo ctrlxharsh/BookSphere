@@ -7,6 +7,7 @@ import aiHandler from './api/ai.js';
 import usersHandler from './api/users.js';
 import studentHandler from './api/student.js';
 import statsHandler from './api/stats.js';
+import researchHandler from './api/research.js';
 import requestsHandler from './api/requests.js';
 import reportsHandler from './api/reports.js';
 import publicStatsHandler from './api/public-stats.js';
@@ -67,7 +68,8 @@ app.delete('/api/books', wrapHandler(booksHandler));
 app.get('/api/books/categories', wrapHandler(booksHandler));
 app.get('/api/public-stats', wrapHandler(publicStatsHandler));
 app.post('/api/renew', wrapHandler(renewHandler));
-app.get('/api/stats', wrapHandler(statsHandler));
+app.all('/api/stats', (req, res) => statsHandler(req, res));
+app.all('/api/research', (req, res) => researchHandler(req, res));
 app.get('/api/activities', wrapHandler(activitiesHandler));
 app.post('/api/activities', wrapHandler(activitiesHandler));
 

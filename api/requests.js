@@ -9,10 +9,12 @@ export default async function handler(req, res) {
       let queryText = `
         SELECT r.id, r.status, r.request_date,
                u.name as student_name, u.user_id as student_id,
-               b.title as book_title, b.id as book_id
+               b.title as book_title, b.id as book_id,
+               rm.title as research_title, rm.id as research_id
         FROM requests r
         JOIN users u ON r.user_id = u.id
-        JOIN books b ON r.book_id = b.id
+        LEFT JOIN books b ON r.book_id = b.id
+        LEFT JOIN research_materials rm ON r.research_id = rm.id
       `;
       let queryParams = [];
 
@@ -34,18 +36,22 @@ export default async function handler(req, res) {
       res.status(500).json({ message: 'Error fetching requests' });
     }
   } else if (req.method === 'POST') {
-    const { userId, bookId } = req.body;
+    const { userId, bookId, researchId } = req.body;
     try {
       const userRes = await pool.query('SELECT id FROM users WHERE user_id = $1', [userId]);
       if (userRes.rows.length === 0) return res.status(404).json({ message: 'User not found' });
       const internalUserId = userRes.rows[0].id;
 
-      const checkRes = await pool.query('SELECT * FROM requests WHERE user_id = $1 AND book_id = $2 AND status = $3', [internalUserId, bookId, 'pending']);
+      // Check for existing pending request
+      const checkRes = await pool.query(
+        'SELECT * FROM requests WHERE user_id = $1 AND (book_id = $2 OR research_id = $3) AND status = $4',
+        [internalUserId, bookId || null, researchId || null, 'pending']
+      );
       if (checkRes.rows.length > 0) return res.status(400).json({ message: 'Request already pending' });
 
       const result = await pool.query(
-        'INSERT INTO requests (user_id, book_id) VALUES ($1, $2) RETURNING *',
-        [internalUserId, bookId]
+        'INSERT INTO requests (user_id, book_id, research_id) VALUES ($1, $2, $3) RETURNING *',
+        [internalUserId, bookId || null, researchId || null]
       );
       res.status(201).json(result.rows[0]);
     } catch (err) {
@@ -62,11 +68,17 @@ export default async function handler(req, res) {
       await pool.query('UPDATE requests SET status = $1 WHERE id = $2', [status, requestId]);
 
       if (status === 'approved') {
-        await pool.query(
-          'INSERT INTO loans (user_id, book_id, due_date) VALUES ($1, $2, CURRENT_DATE + INTERVAL \'14 days\')',
-          [request.user_id, request.book_id]
-        );
-        await pool.query('UPDATE books SET available = false WHERE id = $1', [request.book_id]);
+        if (request.book_id) {
+          await pool.query(
+            'INSERT INTO loans (user_id, book_id, due_date) VALUES ($1, $2, CURRENT_DATE + INTERVAL \'14 days\')',
+            [request.user_id, request.book_id]
+          );
+          await pool.query('UPDATE books SET available = false WHERE id = $1', [request.book_id]);
+        } else if (request.research_id) {
+          // For research materials, we might just mark them as 'in use' or similar
+          // But usually they are special collections. For now, just mark approved is enough.
+          await pool.query('UPDATE research_materials SET available = false WHERE id = $1', [request.research_id]);
+        }
       }
 
       res.status(200).json({ message: `Request ${status}` });

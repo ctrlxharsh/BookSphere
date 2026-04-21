@@ -16,17 +16,22 @@ export default function LibrarianDashboard() {
   const [reports, setReports] = useState([]);
   const [loading, setLoading] = useState(true);
   const [editBook, setEditBook] = useState(null);
+  const [researchMaterials, setResearchMaterials] = useState([]);
+  const [showAddResearchModal, setShowAddResearchModal] = useState(false);
+  const [showEditResearchModal, setShowEditResearchModal] = useState(false);
+  const [editResearch, setEditResearch] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
       try {
-        const [statsRes, actRes, booksRes, reqRes, repRes] = await Promise.all([
+        const [statsRes, actRes, booksRes, reqRes, repRes, resRes] = await Promise.all([
           fetch('/api/stats'),
           fetch('/api/activities'),
           fetch('/api/books'),
           fetch('/api/requests'),
-          fetch('/api/reports')
+          fetch('/api/reports'),
+          fetch('/api/research')
         ]);
         
         setStats(await statsRes.json());
@@ -34,6 +39,7 @@ export default function LibrarianDashboard() {
         setBooks(await booksRes.json());
         setRequests(await reqRes.json());
         setReports(await repRes.json());
+        setResearchMaterials(await resRes.json());
       } catch (err) {
         console.error('Error fetching librarian data:', err);
       } finally {
@@ -140,6 +146,71 @@ export default function LibrarianDashboard() {
           })
         });
       }
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const handleAddResearch = async (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const researchData = Object.fromEntries(formData);
+    
+    try {
+      const res = await fetch('/api/research', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(researchData)
+      });
+      if (res.ok) {
+        setShowAddResearchModal(false);
+        // Refresh research
+        const resRes = await fetch('/api/research');
+        setResearchMaterials(await resRes.json());
+        // Log activity
+        await fetch('/api/activities', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            icon: 'microscope',
+            iconBg: 'bg-tertiary/10',
+            iconColor: 'text-tertiary',
+            text: `New research material "${researchData.title}" catalogued.`,
+            meta: `By ${user?.name}`
+          })
+        });
+      }
+    } catch (err) { console.error(err); }
+  };
+
+  const handleEditResearch = async (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const researchData = { ...Object.fromEntries(formData), id: editResearch.id };
+    
+    try {
+      const res = await fetch('/api/research', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(researchData)
+      });
+      if (res.ok) {
+        setShowEditResearchModal(false);
+        setEditResearch(null);
+        // Refresh research
+        const resRes = await fetch('/api/research');
+        setResearchMaterials(await resRes.json());
+      }
+    } catch (err) { console.error(err); }
+  };
+
+  const handleDeleteResearch = async (id) => {
+    if (!confirm('Delete this research material?')) return;
+    try {
+      const res = await fetch(`/api/research?id=${id}`, { method: 'DELETE' });
+      if (res.ok) {
+        setResearchMaterials(researchMaterials.filter(m => m.id !== id));
+      }
     } catch (err) { console.error(err); }
   };
 
@@ -218,20 +289,24 @@ export default function LibrarianDashboard() {
           </Link>
 
           <nav className="space-y-1">
-            {['Dashboard', 'Manage Books', 'Requests', 'Reports'].map((tab) => (
+            {['Dashboard', 'Catalogue', 'Research', 'Requests', 'Members', 'Reports'].map((tab) => (
               <button
                 key={tab}
                 onClick={() => setActiveTab(tab)}
-                className={`w-full flex items-center space-x-3 px-4 py-3 rounded-xl font-label text-sm font-semibold transition-all duration-200 ${
+                className={`w-full flex items-center gap-3 px-4 py-3.5 rounded-xl font-label text-sm font-bold transition-all duration-300 ${
                   activeTab === tab 
-                    ? 'bg-primary text-on-primary shadow-lg shadow-primary/20' 
+                    ? 'bg-primary text-on-primary shadow-xl shadow-primary/25 translate-x-1' 
                     : 'text-on-surface-variant hover:bg-surface-container-high'
                 }`}
               >
-                <span className="material-symbols-outlined text-[20px]">
-                  {tab === 'Dashboard' ? 'dashboard' : tab === 'Manage Books' ? 'menu_book' : tab === 'Requests' ? 'pending_actions' : 'analytics'}
+                <span className="material-symbols-outlined notranslate text-[22px] shrink-0">
+                  {tab === 'Dashboard' ? 'dashboard' : 
+                   tab === 'Catalogue' ? 'auto_stories' : 
+                   tab === 'Research' ? 'science' : 
+                   tab === 'Requests' ? 'pending_actions' : 
+                   tab === 'Members' ? 'group' : 'analytics'}
                 </span>
-                <span>{tab}</span>
+                <span className="truncate">{tab}</span>
               </button>
             ))}
           </nav>
@@ -260,17 +335,17 @@ export default function LibrarianDashboard() {
           <div className="flex items-center space-x-4">
             <button 
               onClick={() => setShowAddUserModal(true)}
-              className="flex items-center space-x-2 bg-secondary text-on-secondary px-5 py-2.5 rounded-full font-label text-sm font-bold shadow-ambient hover:scale-105 transition-transform"
+              className="flex items-center space-x-2 bg-secondary text-on-secondary px-6 py-2.5 rounded-full font-label text-sm font-bold shadow-lg shadow-secondary/20 hover:scale-[1.03] active:scale-95 transition-all"
             >
-              <span className="material-symbols-outlined text-[18px]">person_add</span>
+              <span className="material-symbols-outlined notranslate text-[20px]">person_add</span>
               <span>Register Member</span>
             </button>
             <button 
-              onClick={() => setShowAddModal(true)}
-              className="flex items-center space-x-2 bg-primary text-on-primary px-5 py-2.5 rounded-full font-label text-sm font-bold shadow-ambient hover:scale-105 transition-transform"
+              onClick={() => { activeTab === 'Research' ? setShowAddResearchModal(true) : setShowAddModal(true) }}
+              className="flex items-center space-x-2 bg-primary text-on-primary px-6 py-2.5 rounded-full font-label text-sm font-bold shadow-lg shadow-primary/20 hover:scale-[1.03] active:scale-95 transition-all"
             >
-              <span className="material-symbols-outlined text-[18px]">add</span>
-              <span>Add New Asset</span>
+              <span className="material-symbols-outlined notranslate text-[20px]">add</span>
+              <span>Add New {activeTab === 'Research' ? 'Research' : 'Asset'}</span>
             </button>
           </div>
         </header>
@@ -282,7 +357,6 @@ export default function LibrarianDashboard() {
             </div>
           ) : activeTab === 'Dashboard' ? (
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 max-w-[1400px]">
-              {/* Stats Row */}
               <div className="lg:col-span-12 grid grid-cols-1 md:grid-cols-3 gap-6">
                 {stats.map((s) => (
                   <div key={s.label} className="bg-surface-container-low rounded-xl p-6 relative overflow-hidden group hover:scale-[1.02] transition-transform duration-300">
@@ -299,7 +373,6 @@ export default function LibrarianDashboard() {
                 ))}
               </div>
 
-              {/* Activity Feed */}
               <div className="lg:col-span-8 bg-surface-container-low rounded-2xl p-8 border border-outline-variant/10">
                 <h3 className="font-headline text-lg font-bold text-on-surface mb-8">Recent Library Activity</h3>
                 <div className="space-y-6">
@@ -319,7 +392,7 @@ export default function LibrarianDashboard() {
                 </div>
               </div>
             </div>
-          ) : activeTab === 'Manage Books' ? (
+          ) : activeTab === 'Catalogue' ? (
             <div className="bg-surface-container-low rounded-2xl overflow-hidden border border-outline-variant/10">
               <table className="w-full text-left border-collapse">
                 <thead className="bg-surface-container-high">
@@ -356,23 +429,60 @@ export default function LibrarianDashboard() {
                 </tbody>
               </table>
             </div>
+          ) : activeTab === 'Research' ? (
+            <div className="bg-surface-container-low rounded-2xl overflow-hidden border border-outline-variant/10">
+              <table className="w-full text-left border-collapse">
+                <thead className="bg-surface-container-high">
+                  <tr>
+                    <th className="p-4 font-label text-xs font-bold uppercase tracking-wider text-on-surface-variant">Research Material</th>
+                    <th className="p-4 font-label text-xs font-bold uppercase tracking-wider text-on-surface-variant">Type</th>
+                    <th className="p-4 font-label text-xs font-bold uppercase tracking-wider text-on-surface-variant">Actions</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-outline-variant/10">
+                  {researchMaterials.map(m => (
+                    <tr key={m.id} className="hover:bg-surface-container-high/50 transition-colors">
+                      <td className="p-4 font-body text-sm font-semibold text-on-surface">{m.title}</td>
+                      <td className="p-4 font-body text-sm text-on-surface-variant">{m.type}</td>
+                      <td className="p-4 space-x-2">
+                        <button onClick={() => { setEditResearch(m); setShowEditResearchModal(true); }} className="text-primary hover:bg-primary/10 p-2 rounded-full transition-colors">
+                          <span className="material-symbols-outlined">edit</span>
+                        </button>
+                        <button onClick={() => handleDeleteResearch(m.id)} className="text-error hover:bg-error/10 p-2 rounded-full transition-colors">
+                          <span className="material-symbols-outlined">delete</span>
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           ) : activeTab === 'Requests' ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {requests.length === 0 && <p className="col-span-full text-center py-12 text-on-surface-variant">No pending requests.</p>}
-              {requests.map(req => (
-                <div key={req.id} className="bg-surface-container-low p-6 rounded-2xl border border-outline-variant/10 shadow-sm">
-                  <div className="flex justify-between items-start mb-4">
-                    <span className="font-label text-[10px] font-bold uppercase text-tertiary bg-tertiary/10 px-2 py-1 rounded">Request #{req.id}</span>
-                    <span className="text-[10px] text-on-surface-variant">{new Date(req.request_date).toLocaleDateString()}</span>
-                  </div>
-                  <h4 className="font-headline font-bold text-on-surface mb-1">{req.book_title}</h4>
-                  <p className="font-body text-sm text-on-surface-variant mb-4">Requested by: <span className="font-semibold text-primary">{req.student_name}</span> ({req.student_id})</p>
-                  <div className="grid grid-cols-2 gap-3">
-                    <button onClick={() => handleRequestAction(req.id, 'approved')} className="bg-primary text-on-primary py-2 rounded-xl text-xs font-bold hover:scale-[1.02] transition-transform">Approve</button>
-                    <button onClick={() => handleRequestAction(req.id, 'rejected')} className="bg-error/10 text-error py-2 rounded-xl text-xs font-bold hover:bg-error/20 transition-colors">Reject</button>
-                  </div>
-                </div>
-              ))}
+            <div className="bg-surface-container-low rounded-2xl overflow-hidden border border-outline-variant/10">
+              <table className="w-full text-left border-collapse">
+                <thead className="bg-surface-container-high">
+                  <tr>
+                    <th className="px-6 py-4 font-label text-xs font-bold text-on-surface-variant/70 uppercase tracking-widest text-left">Item Requested</th>
+                    <th className="px-6 py-4 font-label text-xs font-bold text-on-surface-variant/70 uppercase tracking-widest text-left">Requester</th>
+                    <th className="px-6 py-4 font-label text-xs font-bold text-on-surface-variant/70 uppercase tracking-widest text-left">Actions</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-outline-variant/10">
+                  {requests.map(req => (
+                    <tr key={req.id} className="hover:bg-surface-container-high/50">
+                      <td className="px-6 py-4 font-body text-sm text-on-surface">
+                        {req.book_title || req.research_title}
+                        {req.research_title && <span className="ml-2 text-[10px] bg-tertiary/10 text-tertiary px-1.5 py-0.5 rounded uppercase">Research</span>}
+                      </td>
+                      <td className="px-6 py-4 font-body text-sm text-on-surface-variant">{req.student_name}</td>
+                      <td className="px-6 py-4 space-x-2">
+                        <button onClick={() => handleRequestAction(req.id, 'approved')} className="text-primary hover:bg-primary/10 p-2 rounded-full"><span className="material-symbols-outlined">check</span></button>
+                        <button onClick={() => handleRequestAction(req.id, 'rejected')} className="text-error hover:bg-error/10 p-2 rounded-full"><span className="material-symbols-outlined">close</span></button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </div>
           ) : (
             <div className="bg-surface-container-low rounded-2xl overflow-hidden border border-outline-variant/10">
@@ -531,6 +641,103 @@ export default function LibrarianDashboard() {
                 </div>
               </div>
               <button type="submit" className="w-full bg-primary text-on-primary font-label font-bold py-4 rounded-2xl shadow-lg transition-all mt-4">Save Changes</button>
+            </form>
+          </div>
+        </div>
+      )}
+      {/* Add Research Modal */}
+      {showAddResearchModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in duration-300">
+          <div className="bg-surface-container-lowest w-full max-w-lg rounded-3xl shadow-2xl overflow-hidden animate-in zoom-in-95 duration-300">
+            <div className="p-8 border-b border-outline-variant/15 flex justify-between items-center bg-tertiary/5">
+              <h3 className="font-headline text-xl font-bold text-on-surface">Catalogue Research Material</h3>
+              <button onClick={() => setShowAddResearchModal(false)} className="text-on-surface-variant hover:bg-surface-container-high p-2 rounded-full">
+                <span className="material-symbols-outlined">close</span>
+              </button>
+            </div>
+            <form onSubmit={handleAddResearch} className="p-8 space-y-4">
+              <div className="grid grid-cols-2 gap-4">
+                <div className="col-span-2">
+                  <label className="font-label text-xs font-bold text-on-surface-variant uppercase mb-2 block">Title</label>
+                  <input name="title" required className="w-full bg-surface-container-low border border-outline-variant/30 rounded-xl px-4 py-3 font-body text-sm" />
+                </div>
+                <div>
+                  <label className="font-label text-xs font-bold text-on-surface-variant uppercase mb-2 block">Author / Contributor</label>
+                  <input name="author" required className="w-full bg-surface-container-low border border-outline-variant/30 rounded-xl px-4 py-3 font-body text-sm" />
+                </div>
+                <div>
+                  <label className="font-label text-xs font-bold text-on-surface-variant uppercase mb-2 block">Type</label>
+                  <select name="type" className="w-full bg-surface-container-low border border-outline-variant/30 rounded-xl px-4 py-3 font-body text-sm">
+                    <option>Thesis</option>
+                    <option>Manuscript</option>
+                    <option>Journal</option>
+                    <option>Research Paper</option>
+                    <option>Digital Collection</option>
+                  </select>
+                </div>
+                <div className="col-span-2">
+                  <label className="font-label text-xs font-bold text-on-surface-variant uppercase mb-2 block">Image URL</label>
+                  <input name="img_url" required className="w-full bg-surface-container-low border border-outline-variant/30 rounded-xl px-4 py-3 font-body text-sm" placeholder="https://..." />
+                </div>
+                <div className="col-span-2">
+                  <label className="font-label text-xs font-bold text-on-surface-variant uppercase mb-2 block">External Link (Optional)</label>
+                  <input name="external_link" className="w-full bg-surface-container-low border border-outline-variant/30 rounded-xl px-4 py-3 font-body text-sm" placeholder="https://shodhganga.inflibnet.ac.in/..." />
+                </div>
+                <div className="col-span-2">
+                  <label className="font-label text-xs font-bold text-on-surface-variant uppercase mb-2 block">Description</label>
+                  <textarea name="description" rows="3" className="w-full bg-surface-container-low border border-outline-variant/30 rounded-xl px-4 py-3 font-body text-sm" />
+                </div>
+              </div>
+              <button type="submit" className="w-full bg-tertiary text-on-tertiary font-label font-bold py-4 rounded-2xl shadow-lg transition-all mt-4">Catalog Material</button>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {/* Edit Research Modal */}
+      {showEditResearchModal && editResearch && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in duration-300">
+          <div className="bg-surface-container-lowest w-full max-w-lg rounded-3xl shadow-2xl overflow-hidden animate-in zoom-in-95 duration-300">
+            <div className="p-8 border-b border-outline-variant/15 flex justify-between items-center bg-tertiary/5">
+              <h3 className="font-headline text-xl font-bold text-on-surface">Edit Material: {editResearch.title}</h3>
+              <button onClick={() => setShowEditResearchModal(false)} className="text-on-surface-variant hover:bg-surface-container-high p-2 rounded-full">
+                <span className="material-symbols-outlined">close</span>
+              </button>
+            </div>
+            <form onSubmit={handleEditResearch} className="p-8 space-y-4">
+              <div className="grid grid-cols-2 gap-4">
+                <div className="col-span-2">
+                  <label className="font-label text-xs font-bold text-on-surface-variant uppercase mb-2 block">Title</label>
+                  <input name="title" defaultValue={editResearch.title} required className="w-full bg-surface-container-low border border-outline-variant/30 rounded-xl px-4 py-3 font-body text-sm" />
+                </div>
+                <div>
+                  <label className="font-label text-xs font-bold text-on-surface-variant uppercase mb-2 block">Author / Contributor</label>
+                  <input name="author" defaultValue={editResearch.author} required className="w-full bg-surface-container-low border border-outline-variant/30 rounded-xl px-4 py-3 font-body text-sm" />
+                </div>
+                <div>
+                  <label className="font-label text-xs font-bold text-on-surface-variant uppercase mb-2 block">Type</label>
+                  <select name="type" defaultValue={editResearch.type} className="w-full bg-surface-container-low border border-outline-variant/30 rounded-xl px-4 py-3 font-body text-sm">
+                    <option>Thesis</option>
+                    <option>Manuscript</option>
+                    <option>Journal</option>
+                    <option>Research Paper</option>
+                    <option>Digital Collection</option>
+                  </select>
+                </div>
+                <div className="col-span-2">
+                  <label className="font-label text-xs font-bold text-on-surface-variant uppercase mb-2 block">Image URL</label>
+                  <input name="img_url" defaultValue={editResearch.img_url} required className="w-full bg-surface-container-low border border-outline-variant/30 rounded-xl px-4 py-3 font-body text-sm" />
+                </div>
+                <div className="col-span-2">
+                  <label className="font-label text-xs font-bold text-on-surface-variant uppercase mb-2 block">External Link</label>
+                  <input name="external_link" defaultValue={editResearch.external_link} className="w-full bg-surface-container-low border border-outline-variant/30 rounded-xl px-4 py-3 font-body text-sm" />
+                </div>
+                <div className="col-span-2">
+                  <label className="font-label text-xs font-bold text-on-surface-variant uppercase mb-2 block">Description</label>
+                  <textarea name="description" defaultValue={editResearch.description} rows="3" className="w-full bg-surface-container-low border border-outline-variant/30 rounded-xl px-4 py-3 font-body text-sm" />
+                </div>
+              </div>
+              <button type="submit" className="w-full bg-tertiary text-on-tertiary font-label font-bold py-4 rounded-2xl shadow-lg transition-all mt-4">Save Changes</button>
             </form>
           </div>
         </div>

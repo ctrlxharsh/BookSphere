@@ -1,55 +1,89 @@
 import { getPool } from './lib/db.js';
 
-export default async function handler(req, res) {
+export const handler = async (event, context) => {
   const pool = getPool();
+  const method = event.httpMethod;
+  const path = event.path;
 
-  if (req.method === 'GET') {
-    if (req.url.includes('categories')) {
+  if (method === 'GET') {
+    if (path.includes('categories')) {
       try {
         const result = await pool.query('SELECT DISTINCT category FROM books WHERE category IS NOT NULL');
-        res.status(200).json(['All', ...result.rows.map(r => r.category)]);
+        return {
+          statusCode: 200,
+          body: JSON.stringify(['All', ...result.rows.map(r => r.category)])
+        };
       } catch (err) {
-        res.status(500).json({ message: 'Error fetching categories' });
+        return {
+          statusCode: 500,
+          body: JSON.stringify({ message: 'Error fetching categories' })
+        };
       }
-      return;
     }
     try {
       const result = await pool.query('SELECT * FROM books ORDER BY id DESC');
-      res.status(200).json(result.rows);
+      return {
+        statusCode: 200,
+        body: JSON.stringify(result.rows)
+      };
     } catch (err) {
-      res.status(500).json({ message: 'Error fetching books' });
+      return {
+        statusCode: 500,
+        body: JSON.stringify({ message: 'Error fetching books' })
+      };
     }
-  } else if (req.method === 'POST') {
-    const { title, author, category, img_url, description } = req.body;
+  } else if (method === 'POST') {
+    const { title, author, category, img_url, description } = JSON.parse(event.body);
     try {
       const result = await pool.query(
         'INSERT INTO books (title, author, category, img_url, description) VALUES ($1, $2, $3, $4, $5) RETURNING *',
         [title, author, category, img_url, description]
       );
-      res.status(201).json(result.rows[0]);
+      return {
+        statusCode: 201,
+        body: JSON.stringify(result.rows[0])
+      };
     } catch (err) {
-      res.status(500).json({ message: 'Error adding book' });
+      return {
+        statusCode: 500,
+        body: JSON.stringify({ message: 'Error adding book' })
+      };
     }
-  } else if (req.method === 'PUT') {
-    const { id, title, author, category, img_url, description, available } = req.body;
+  } else if (method === 'PUT') {
+    const { id, title, author, category, img_url, description, available } = JSON.parse(event.body);
     try {
       const result = await pool.query(
         'UPDATE books SET title=$1, author=$2, category=$3, img_url=$4, description=$5, available=$6 WHERE id=$7 RETURNING *',
         [title, author, category, img_url, description, available, id]
       );
-      res.status(200).json(result.rows[0]);
+      return {
+        statusCode: 200,
+        body: JSON.stringify(result.rows[0])
+      };
     } catch (err) {
-      res.status(500).json({ message: 'Error updating book' });
+      return {
+        statusCode: 500,
+        body: JSON.stringify({ message: 'Error updating book' })
+      };
     }
-  } else if (req.method === 'DELETE') {
-    const { id } = req.query;
+  } else if (method === 'DELETE') {
+    const { id } = event.queryStringParameters || {};
     try {
       await pool.query('DELETE FROM books WHERE id=$1', [id]);
-      res.status(200).json({ message: 'Book deleted' });
+      return {
+        statusCode: 200,
+        body: JSON.stringify({ message: 'Book deleted' })
+      };
     } catch (err) {
-      res.status(500).json({ message: 'Error deleting book' });
+      return {
+        statusCode: 500,
+        body: JSON.stringify({ message: 'Error deleting book' })
+      };
     }
   } else {
-    res.status(405).json({ message: 'Method not allowed' });
+    return {
+      statusCode: 405,
+      body: JSON.stringify({ message: 'Method not allowed' })
+    };
   }
-}
+};

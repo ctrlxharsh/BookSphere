@@ -1,17 +1,23 @@
 import { GoogleGenerativeAI } from '@google/generative-ai';
 
-export default async function handler(req, res) {
-  if (req.method !== 'POST') {
-    return res.status(405).json({ message: 'Method not allowed' });
+export const handler = async (event, context) => {
+  if (event.httpMethod !== 'POST') {
+    return {
+      statusCode: 405,
+      body: JSON.stringify({ message: 'Method not allowed' })
+    };
   }
 
-  const { message, history } = req.body;
+  const { message, history } = JSON.parse(event.body);
   const apiKey = process.env.GEMINI_API_KEY;
 
   if (!apiKey) {
-    return res.status(500).json({ 
-      text: "I'm sorry, but the librarian has not configured my brain yet (GEMINI_API_KEY is missing). Please ask them to set up the environment variables." 
-    });
+    return {
+      statusCode: 500,
+      body: JSON.stringify({ 
+        text: "I'm sorry, but the librarian has not configured my brain yet (GEMINI_API_KEY is missing). Please ask them to set up the environment variables." 
+      })
+    };
   }
 
   try {
@@ -32,9 +38,15 @@ export default async function handler(req, res) {
     const response = await result.response;
     const text = response.text();
 
-    res.status(200).json({ text });
+    return {
+      statusCode: 200,
+      body: JSON.stringify({ text })
+    };
   } catch (err) {
     console.error('Gemini API Error:', err);
-    res.status(500).json({ text: "I encountered an error while processing your request. Please try again later." });
+    return {
+      statusCode: 500,
+      body: JSON.stringify({ text: "I encountered an error while processing your request. Please try again later." })
+    };
   }
-}
+};

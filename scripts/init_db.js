@@ -61,8 +61,25 @@ async function init() {
         id SERIAL PRIMARY KEY,
         user_id INTEGER REFERENCES users(id),
         book_id INTEGER REFERENCES books(id),
+        research_id INTEGER, -- Optional link to research_materials
         status VARCHAR(20) DEFAULT 'pending',
         request_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+      );
+    `);
+
+    // Research materials table
+    await pool.query(`
+      CREATE TABLE IF NOT EXISTS research_materials (
+        id SERIAL PRIMARY KEY,
+        title VARCHAR(255) NOT NULL,
+        author VARCHAR(100),
+        type VARCHAR(50), 
+        category VARCHAR(50),
+        description TEXT,
+        available BOOLEAN DEFAULT TRUE,
+        img_url TEXT,
+        external_link TEXT,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
       );
     `);
 
@@ -123,6 +140,12 @@ async function init() {
       ('history_edu', 'bg-surface-container-low', 'text-on-surface-variant', 'Rare manuscript "Tarikh-i-Firoz Shahi" digitization completed.', 'Digital Archives Div.'),
       ('assignment_return', 'bg-surface-container-low', 'text-primary', 'Batch return processed for Faculty of Arts.', 'Circulation Desk'),
       ('warning', 'bg-error-container', 'text-on-error-container', 'Overdue notice escalated for ID: 994821.', 'System Auto');
+
+      INSERT INTO research_materials (title, author, type, category, description, img_url, external_link) VALUES
+      ('Socio-Economic Conditions during the Delhi Sultanate', 'Dr. Arshad Ali', 'Thesis', 'History', 'A detailed doctoral thesis exploring 13th-14th century India.', 'https://images.unsplash.com/photo-1516979187457-637abb4f9353?auto=format&fit=crop&q=80&w=400', 'https://shodhganga.inflibnet.ac.in/'),
+      ('Baburnama (Persian Translation Fragment)', 'Zahir-ud-din Babur', 'Manuscript', 'Archives', 'A rare 16th-century Persian manuscript fragment of the Baburnama.', 'https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&q=80&w=400', ''),
+      ('Aligarh Movement Archival Letters', 'Sir Syed Ahmad Khan', 'Digital Collection', 'History', 'A collection of letters and documents from the Aligarh Movement.', 'https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&q=80&w=400', ''),
+      ('Impact of Scientific Society on Aligarh', 'Prof. K.M. Ashraf', 'Research Paper', 'Science', 'Analysis of the Scientific Society founded in 1864.', 'https://images.unsplash.com/photo-1532012197267-da84d127e765?auto=format&fit=crop&q=80&w=400', '');
     `);
 
     console.log('DB Initialization complete.');

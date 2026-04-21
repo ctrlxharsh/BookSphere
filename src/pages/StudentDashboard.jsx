@@ -198,9 +198,12 @@ export default function StudentDashboard() {
                         <span className="material-symbols-outlined symbol-fill">local_library</span>
                       </div>
                       <div>
-                        <h4 className="font-headline text-md text-on-surface">{item.book_title}</h4>
+                        <h4 className="font-headline text-md text-on-surface">
+                          {item.book_title || item.research_title}
+                          {item.research_title && <span className="ml-2 text-[10px] bg-tertiary/10 text-tertiary px-1.5 py-0.5 rounded uppercase tracking-wider">Research</span>}
+                        </h4>
                         <p className="font-body text-sm text-on-surface-variant">
-                          {item.status === 'approved' ? 'Available for pickup at Main Desk' : 'Waiting for librarian approval'}
+                          {item.status === 'approved' ? 'Access granted / Ready for pickup' : 'Waiting for librarian approval'}
                         </p>
                       </div>
                     </div>
