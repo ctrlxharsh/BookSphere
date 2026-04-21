@@ -1,0 +1,319 @@
+<!DOCTYPE html><html class="light" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Maulana Azad Library - Gateway to Centuries of Knowledge</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&amp;family=Noto+Serif:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-tint": "#0f6d39",
+                        "surface-dim": "#dbdad6",
+                        "error-container": "#ffdad6",
+                        "on-background": "#1b1c1a",
+                        "tertiary-container": "#705313",
+                        "primary-container": "#006633",
+                        "tertiary": "#553c00",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary": "#46664d",
+                        "inverse-primary": "#84d999",
+                        "on-secondary-fixed-variant": "#2f4d36",
+                        "on-tertiary-fixed-variant": "#5d4201",
+                        "on-secondary-fixed": "#03210e",
+                        "on-surface": "#1b1c1a",
+                        "surface-variant": "#e4e2de",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-highest": "#e4e2de",
+                        "on-secondary-container": "#4a6a51",
+                        "primary-fixed": "#9ff6b4",
+                        "on-tertiary-container": "#f1c97d",
+                        "primary": "#004b24",
+                        "surface-container": "#efeeea",
+                        "primary-fixed-dim": "#84d999",
+                        "on-primary": "#ffffff",
+                        "on-primary-container": "#8ce1a1",
+                        "outline": "#6f7a6f",
+                        "surface-bright": "#fbf9f5",
+                        "on-surface-variant": "#3f4940",
+                        "on-tertiary-fixed": "#261900",
+                        "surface-container-low": "#f5f3ef",
+                        "secondary-container": "#c5e9c9",
+                        "on-secondary": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "on-primary-fixed": "#00210c",
+                        "secondary-fixed-dim": "#accfb1",
+                        "background": "#fbf9f5",
+                        "inverse-surface": "#30312e",
+                        "on-primary-fixed-variant": "#005228",
+                        "on-error": "#ffffff",
+                        "tertiary-fixed": "#ffdea5",
+                        "outline-variant": "#bfc9bd",
+                        "secondary-fixed": "#c8ebcc",
+                        "surface-container-high": "#eae8e4",
+                        "inverse-on-surface": "#f2f0ed",
+                        "error": "#ba1a1a",
+                        "surface": "#fbf9f5",
+                        "tertiary-fixed-dim": "#e9c176"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["Noto Serif", "serif"],
+                        "body": ["Manrope", "sans-serif"],
+                        "label": ["Manrope", "sans-serif"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .arch-clip {
+            clip-path: path('M0,100 C0,40 20,0 50,0 C80,0 100,40 100,100 L100,200 L0,200 Z'); /* Simplified arch for demonstration, CSS clip-path doesn't scale perfectly with SVG paths without absolute sizing, using border-radius trick instead for broader compatibility below */
+        }
+        .arch-frame {
+            border-top-left-radius: 50% 20%;
+            border-top-right-radius: 50% 20%;
+        }
+        .text-gradient-primary {
+            background: linear-gradient(135deg, #004b24, #006633);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .bg-gradient-primary {
+            background: linear-gradient(135deg, #004b24, #006633);
+        }
+        .shadow-ambient {
+            box-shadow: 0 10px 40px -10px rgba(27, 28, 26, 0.06);
+        }
+        .shadow-ambient-hover:hover {
+            box-shadow: 0 20px 40px -5px rgba(27, 28, 26, 0.12);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body antialiased selection:bg-primary-container selection:text-on-primary-container">
+<!-- TopNavBar -->
+<nav class="bg-[#fbf9f5]/90 backdrop-blur-[20px] dark:bg-[#1b1c1a]/90 text-[#004b24] dark:text-[#006633] font-['Noto_Serif'] tracking-tight docked full-width top-0 z-50 sticky relative">
+<div class="flex justify-between items-center w-full px-8 py-4 max-w-screen-2xl mx-auto">
+<div class="text-2xl font-bold text-[#004b24] font-['Noto_Serif']" style="">Maulana Azad Library</div>
+<div class="hidden md:flex gap-8 items-center">
+<a class="text-[#004b24] dark:text-[#006633] font-bold border-b-2 border-[#004b24] pb-1 hover:bg-[#eae8e4] dark:hover:bg-[#2d2e2c] transition-all duration-300" href="#" style="">Home</a>
+<a class="text-on-surface-variant font-medium hover:text-[#004b24] transition-colors hover:bg-[#eae8e4] dark:hover:bg-[#2d2e2c] transition-all duration-300" href="#" style="">Catalog</a>
+<a class="text-on-surface-variant font-medium hover:text-[#004b24] transition-colors hover:bg-[#eae8e4] dark:hover:bg-[#2d2e2c] transition-all duration-300" href="#" style="">Research</a>
+<a class="text-on-surface-variant font-medium hover:text-[#004b24] transition-colors hover:bg-[#eae8e4] dark:hover:bg-[#2d2e2c] transition-all duration-300" href="#" style="">About</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="hidden md:block font-body text-sm font-semibold px-6 py-2 rounded-full text-on-surface hover:bg-surface-container transition-colors" style="">Login</button>
+<button class="p-2 text-primary hover:bg-[#eae8e4] transition-all duration-300 rounded-full" style="">
+<span class="material-symbols-outlined" style="">account_circle</span>
+</button>
+</div>
+</div>
+<div class="bg-[#f5f3ef] dark:bg-[#2a2a28] h-[1px] w-full absolute bottom-0 opacity-15"></div>
+</nav>
+<main class="min-h-screen">
+<!-- Hero Section -->
+<section class="relative pt-24 pb-32 px-6 lg:px-12 max-w-screen-2xl mx-auto overflow-hidden">
+<div class="absolute inset-0 z-0 pointer-events-none flex items-center justify-center opacity-[0.03]">
+<span class="material-symbols-outlined text-[40rem]" style="font-variation-settings: &quot;FILL&quot; 1;">local_library</span>
+</div>
+<div class="relative z-10 flex flex-col items-center text-center max-w-4xl mx-auto">
+<p class="font-body text-tertiary text-sm tracking-[0.2em] uppercase mb-4 font-semibold" style="">Aligarh Muslim University</p>
+<h1 class="font-headline text-5xl md:text-7xl font-extrabold text-gradient-primary tracking-tight leading-[1.1] mb-8" style="">
+                    Gateway to Centuries of Knowledge
+                </h1>
+<p class="font-body text-on-surface-variant text-lg md:text-xl max-w-2xl mx-auto mb-12 leading-relaxed" style="">Welcome to one of the largest libraries in Asia, home to over 1.5 million volumes and a world-renowned collection of rare manuscripts, providing premier resources for global academic research and excellence.</p>
+<!-- Architectural Search Bar -->
+<div class="w-full max-w-3xl relative">
+<div class="absolute inset-0 bg-surface-container-lowest rounded-[3rem] shadow-ambient"></div>
+<div class="relative flex items-center bg-surface-container-lowest rounded-[3rem] p-2 border border-outline-variant/15 group hover:border-primary/30 transition-colors">
+<span class="material-symbols-outlined text-primary ml-6 mr-3" style="">search</span>
+<input class="w-full bg-transparent border-none outline-none focus:ring-0 font-body text-on-surface placeholder:text-on-surface-variant/50 text-lg py-4" placeholder="Search the Catalog, Archives, or Repositories..." type="text">
+<button class="bg-gradient-primary text-on-primary font-body font-semibold px-8 py-4 rounded-full flex items-center gap-2 hover:opacity-90 transition-opacity ml-2" style="">
+<span class="" style="">Discover</span>
+<span class="material-symbols-outlined text-sm" style="">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Bento Grid Section -->
+<section class="px-6 lg:px-12 py-16 max-w-screen-2xl mx-auto">
+<div class="grid grid-cols-1 md:grid-cols-12 gap-8 auto-rows-[24rem]">
+<!-- 1. Manuscript of the Month (Spans 8 cols) -->
+<article class="md:col-span-8 relative rounded-xl bg-surface-container-low overflow-hidden group shadow-ambient shadow-ambient-hover transition-all duration-500 hover:scale-[1.01]">
+<div class="absolute inset-0 z-0">
+<img alt="Ancient illuminated manuscript pages with intricate gold leaf and calligraphy, dramatically lit" class="w-full h-full object-cover opacity-80" data-alt="Ancient illuminated manuscript pages with intricate gold leaf and calligraphy, dramatically lit in a museum setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB0pjUzv0qMqRrEYLFP-xeEqmCZQt0Vz6A_hDuqBpnIARt3PCUA9sAbqUZTUrssWSx5DrtdQ9luI_NqToONXC_hVeHJfQnQUefD_nzy4MzXY3j4KVdYr1mrH2g5ue7r2TG-MMcDm59y0mOn7XPXKk1tyYQKK6Mv9HKpcdwbgCYKzrbK5GAYFsDVskDeQeEeMEU2VjFXfIWdRfbTMFJw8UsnS211PZ0oLJwnDLeMYlOXLpOGMJPbnapOqBPKucsTR2dxpp4OxJ3ZxMY" style="">
+<div class="absolute inset-0 bg-gradient-to-t from-[#1b1c1a]/90 via-[#1b1c1a]/40 to-transparent"></div>
+</div>
+<div class="absolute inset-0 border border-outline-variant/15 rounded-xl pointer-events-none"></div>
+<div class="relative z-10 h-full flex flex-col justify-end p-8 md:p-12">
+<span class="inline-flex items-center gap-2 bg-surface/20 backdrop-blur-md text-surface-bright px-3 py-1 rounded-full text-xs font-semibold tracking-wider uppercase mb-4 w-fit border border-surface-bright/20" style="">
+<span class="material-symbols-outlined text-[14px]" style="">stars</span> Manuscript of the Month
+                        </span>
+<h2 class="font-headline text-3xl md:text-4xl text-surface-bright font-bold mb-2" style="">Tariq-e-Firoz Shahi</h2>
+<p class="font-body text-surface-bright/80 max-w-xl mb-6" style="">A 14th-century chronicle detailing the history of the Delhi Sultanate, preserved with its original gold-leaf illuminations and Nastaʿlīq script.</p>
+<!-- Hover Reveal Details -->
+<div class="overflow-hidden max-h-0 opacity-0 group-hover:max-h-[100px] group-hover:opacity-100 transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]">
+<div class="flex gap-6 border-t border-surface-bright/20 pt-4 mt-2">
+<div>
+<p class="font-body text-xs text-surface-bright/60 uppercase tracking-wide" style="">Origin</p>
+<p class="font-body text-sm text-surface-bright font-medium" style="">1357 CE, Delhi</p>
+</div>
+<div>
+<p class="font-body text-xs text-surface-bright/60 uppercase tracking-wide" style="">Material</p>
+<p class="font-body text-sm text-surface-bright font-medium" style="">Vellum &amp; Gold Ink</p>
+</div>
+<button class="ml-auto text-tertiary-fixed hover:text-tertiary-fixed-dim font-body text-sm font-semibold flex items-center gap-1 transition-colors" style="">
+                                    Explore Digitized Copy <span class="material-symbols-outlined text-[16px]" style="">arrow_outward</span>
+</button>
+</div>
+</div>
+</div>
+</article>
+<!-- 3. Library Statistics (Spans 4 cols) -->
+<div class="md:col-span-4 bg-surface-container-low rounded-xl p-8 flex flex-col justify-between border border-outline-variant/15 shadow-ambient relative overflow-hidden">
+<div class="absolute top-0 right-0 p-8 opacity-[0.05] pointer-events-none">
+<span class="material-symbols-outlined text-9xl" style="">account_balance</span>
+</div>
+<div>
+<h3 class="font-headline text-2xl text-primary font-bold mb-8" style="">The Collection at a Glance</h3>
+<div class="space-y-6">
+<div class="flex items-start gap-4">
+<span class="material-symbols-outlined text-tertiary text-3xl" style="font-variation-settings: &quot;FILL&quot; 1;">menu_book</span>
+<div>
+<p class="font-headline text-3xl font-bold text-on-surface" style="">1.5M+</p>
+<p class="font-body text-sm text-on-surface-variant font-medium uppercase tracking-wide" style="">Printed Volumes</p>
+</div>
+</div>
+<div class="flex items-start gap-4">
+<span class="material-symbols-outlined text-tertiary text-3xl" style="font-variation-settings: &quot;FILL&quot; 1;">history_edu</span>
+<div>
+<p class="font-headline text-3xl font-bold text-on-surface" style="">16,000</p>
+<p class="font-body text-sm text-on-surface-variant font-medium uppercase tracking-wide" style="">Rare Manuscripts</p>
+</div>
+</div>
+<div class="flex items-start gap-4">
+<span class="material-symbols-outlined text-tertiary text-3xl" style="font-variation-settings: &quot;FILL&quot; 1;">layers</span>
+<div>
+<p class="font-headline text-3xl font-bold text-on-surface" style="">7</p>
+<p class="font-body text-sm text-on-surface-variant font-medium uppercase tracking-wide" style="">Stories of Archives</p>
+</div>
+</div>
+</div>
+</div>
+<a class="font-body text-primary font-semibold text-sm hover:text-primary-container transition-colors inline-flex items-center gap-1 mt-4" href="#" style="">
+                        View Complete Holdings <span class="material-symbols-outlined text-[16px]" style="">chevron_right</span>
+</a>
+</div>
+<!-- 2. New Arrivals (Spans 12 cols, distinct layout) -->
+<div class="md:col-span-12 rounded-xl border border-outline-variant/15 p-8 relative overflow-hidden flex flex-col justify-center" style="background-color: var(--surface);">
+<div class="flex justify-between items-end mb-8">
+<div>
+<h3 class="font-headline text-3xl text-primary font-bold" style="">New Arrivals</h3>
+<p class="font-body text-on-surface-variant mt-2" style="">Recently acquired and digitized academic volumes.</p>
+</div>
+<a class="font-body text-tertiary font-semibold hover:text-tertiary-container transition-colors flex items-center gap-2" href="#" style="">
+                            Browse All <span class="material-symbols-outlined" style="">arrow_forward</span>
+</a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+<!-- Book Card 1 -->
+<div class="group relative flex flex-col items-center">
+<div class="w-full aspect-[3/4] bg-surface-container-high rounded-lg mb-4 shadow-ambient overflow-hidden relative arch-frame border border-outline-variant/10">
+<img alt="Classic leather bound book cover with gold embossed title, vintage aesthetic" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="Classic leather bound book cover with gold embossed title, vintage aesthetic" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCNtisE4sFIqF0GtbDKT_3KmrU_2b964sO-WAEVZ5tNCU_z5rwa3qkZkVpTrJCQjfJjbMVqWpaFHC0hhtaTNz04PYVX_2ALeGsjlzDs-XAydInL5QDNTBP6mawKQGfAJmuEVg9wiTs98AuwGvUqLFcNqVXHzeecHEumGzhyix0BQgh8ERIEZvpbxJEzNxgpUebF5cxr3fZ5wt-_GG3Xa_S2KNXRV5AFvnr_Sr1DiHRoamWzsEvfqmAUlDOWCgkTxziwKE9Kc8WNED8" style="">
+<!-- Glassmorphism Hover Overlay -->
+<div class="absolute inset-0 bg-surface/80 backdrop-blur-md flex flex-col items-center justify-center p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 translate-y-4 group-hover:translate-y-0 ease-[cubic-bezier(0.22,1,0.36,1)]">
+<p class="font-body text-sm text-center text-on-surface mb-4 line-clamp-3" style="">A comprehensive study of Islamic architectural motifs in the Indian subcontinent during the 16th century.</p>
+<button class="bg-primary text-on-primary font-body text-xs px-4 py-2 rounded-full font-semibold flex items-center gap-1 hover:bg-primary-container" style="">
+<span class="material-symbols-outlined text-[14px]" style="">bookmark_add</span> Save
+                                    </button>
+</div>
+</div>
+<h4 class="font-headline font-bold text-on-surface text-center line-clamp-1" style="">Islamic Architecture</h4>
+<p class="font-body text-xs text-on-surface-variant mt-1 text-center" style="">Dr. S.A. Hasan</p>
+</div>
+<!-- Book Card 2 -->
+<div class="group relative flex flex-col items-center hidden md:flex">
+<div class="w-full aspect-[3/4] bg-surface-container-high rounded-lg mb-4 shadow-ambient overflow-hidden relative arch-frame border border-outline-variant/10">
+<img alt="Minimalist modern book cover design in deep green and cream" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="Minimalist modern book cover design in deep green and cream" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD1XPdCrjb740fGW8LM4MYdFCuunNIHm9RGGYE49sLT8u7zdeGPO-V3FI7KxJda5aEBeR79zLOsys94bzN64TCIzD5L4LDQusWN6xnQe93E41OQK0KlGjXQdLUgkGldl-3HrUreQePo5Xo6Xq7-k9_Z7PZwqtQvC3swURcYMy5oDCbIHo_Biyjo3lUCcCi9kSBRakbotqAxq3WPz_3aawh52XUMlxedTCmNnruectTNBcrtXMLXcE8sL4RQ4_bLkPzzDb3AM0jfZnE" style="">
+<div class="absolute inset-0 bg-surface/80 backdrop-blur-md flex flex-col items-center justify-center p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 translate-y-4 group-hover:translate-y-0 ease-[cubic-bezier(0.22,1,0.36,1)]">
+<p class="font-body text-sm text-center text-on-surface mb-4 line-clamp-3" style="">Modern analysis of classical Urdu poetry and its translation into contemporary English literature.</p>
+<button class="bg-primary text-on-primary font-body text-xs px-4 py-2 rounded-full font-semibold flex items-center gap-1 hover:bg-primary-container" style="">
+<span class="material-symbols-outlined text-[14px]" style="">bookmark_add</span> Save
+                                    </button>
+</div>
+</div>
+<h4 class="font-headline font-bold text-on-surface text-center line-clamp-1" style="">Echoes of Ghalib</h4>
+<p class="font-body text-xs text-on-surface-variant mt-1 text-center" style="">Prof. M. Rizvi</p>
+</div>
+<!-- Book Card 3 -->
+<div class="group relative flex flex-col items-center hidden md:flex">
+<div class="w-full aspect-[3/4] bg-surface-container-high rounded-lg mb-4 shadow-ambient overflow-hidden relative arch-frame border border-outline-variant/10">
+<img alt="Stack of old weathered academic journals tied with twine" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="Stack of old weathered academic journals tied with twine" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAsRBHy8uAvvM6TUEIvHJVPwiZc87dB0AaJuwRg4BKnR6cHmOEsShQMWF537paM710B84lvcl6vGOEd4Q5wT8VHCSfs0JqmHHMOCOhaKwrBsh_lYk0NZ58BsxZ4Ea_2zmlcmMZdpo46xt0Te2UnnB4Ge3gpRd_gOerM_7M1mej0gF8tSxh-SkUF8X9U3JvX_BI_lnjYQVtLayBFnJDwNiI9LDplPWuIWh2IOdPlkTZagcDyaHPS3WqD8tfFvAMJuF-_2pLastqpxLI" style="">
+<div class="absolute inset-0 bg-surface/80 backdrop-blur-md flex flex-col items-center justify-center p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 translate-y-4 group-hover:translate-y-0 ease-[cubic-bezier(0.22,1,0.36,1)]">
+<p class="font-body text-sm text-center text-on-surface mb-4 line-clamp-3" style="">Digitized collection of the Aligarh Institute Gazette from 1866 to 1890.</p>
+<button class="bg-primary text-on-primary font-body text-xs px-4 py-2 rounded-full font-semibold flex items-center gap-1 hover:bg-primary-container" style="">
+<span class="material-symbols-outlined text-[14px]" style="">bookmark_add</span> Save
+                                    </button>
+</div>
+</div>
+<h4 class="font-headline font-bold text-on-surface text-center line-clamp-1" style="">Institute Gazette Archives</h4>
+<p class="font-body text-xs text-on-surface-variant mt-1 text-center" style="">Sir Syed Academy</p>
+</div>
+<!-- Book Card 4 -->
+<div class="group relative flex flex-col items-center hidden md:flex">
+<div class="w-full aspect-[3/4] bg-surface-container-high rounded-lg mb-4 shadow-ambient overflow-hidden relative arch-frame border border-outline-variant/10">
+<img alt="Abstract cover art depicting mathematical geometry in gold on dark background" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="Abstract cover art depicting mathematical geometry in gold on dark background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBXC7fqu3v_AR1IIazJkj6sZpKEcXLsUT-U_XyWOzoCjHdlBvcoT5JbH9DKtvPnL1qUYiA79uFtHpzC4trs_itDb3K5Ey-XjEyN93OTUXELv63nUGGDynQ4mTxi5-mThHkgBVF5v1NA2DUZ7KmBq62YPickW76zG1sbIImMydW0GK4sDzSC_H2zmwmSEHM2hN6pqt2MDl1OEG5viBSVD2nweZny-oF7urXtE4JU4ugryIyowVB_u_fvt3QMqV37R0PXKYw1bSlL4zU" style="">
+<div class="absolute inset-0 bg-surface/80 backdrop-blur-md flex flex-col items-center justify-center p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 translate-y-4 group-hover:translate-y-0 ease-[cubic-bezier(0.22,1,0.36,1)]">
+<p class="font-body text-sm text-center text-on-surface mb-4 line-clamp-3" style="">Translations of early Arabic mathematical texts and their influence on European renaissance geometry.</p>
+<button class="bg-primary text-on-primary font-body text-xs px-4 py-2 rounded-full font-semibold flex items-center gap-1 hover:bg-primary-container" style="">
+<span class="material-symbols-outlined text-[14px]" style="">bookmark_add</span> Save
+                                    </button>
+</div>
+</div>
+<h4 class="font-headline font-bold text-on-surface text-center line-clamp-1" style="">Origins of Algebra</h4>
+<p class="font-body text-xs text-on-surface-variant mt-1 text-center" style="">Dept. of Mathematics</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-[#f5f3ef] dark:bg-[#1b1c1a] text-[#004b24] dark:text-[#006633] font-['Manrope'] text-sm tracking-wide w-full py-16 px-12 border-t-[0.5px] border-[#004b24]/10">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-12 max-w-screen-2xl mx-auto">
+<div class="col-span-1 md:col-span-2">
+<span class="font-['Noto_Serif'] text-xl font-bold text-[#004b24] mb-4 block" style="">Maulana Azad Library</span>
+<p class="text-[#1b1c1a]/70 dark:text-[#fbf9f5]/70 max-w-sm" style="">Dedicated to the preservation of knowledge and the facilitation of modern scholarly research.</p>
+<p class="mt-8 text-xs text-[#1b1c1a]/50 dark:text-[#fbf9f5]/50" style="">© 2024 Maulana Azad Library, Aligarh Muslim University. Digital Archivist Division.</p>
+</div>
+<div>
+<h4 class="font-semibold text-[#004b24] mb-4" style="">Collections</h4>
+<ul class="space-y-3">
+<li class="" style=""><a class="text-[#1b1c1a]/70 dark:text-[#fbf9f5]/70 hover:text-[#553c00] transition-colors duration-200 hover:translate-x-1 inline-block transition-transform" href="#" style="">Archives</a></li>
+<li class="" style=""><a class="text-[#1b1c1a]/70 dark:text-[#fbf9f5]/70 hover:text-[#553c00] transition-colors duration-200 hover:translate-x-1 inline-block transition-transform" href="#" style="">Digital Collections</a></li>
+<li class="" style=""><a class="text-[#1b1c1a]/70 dark:text-[#fbf9f5]/70 hover:text-[#553c00] transition-colors duration-200 hover:translate-x-1 inline-block transition-transform" href="#" style="">Institutional Repository</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-semibold text-[#004b24] mb-4" style="">Library Services</h4>
+<ul class="space-y-3">
+<li class="" style=""><a class="text-[#1b1c1a]/70 dark:text-[#fbf9f5]/70 hover:text-[#553c00] transition-colors duration-200 hover:translate-x-1 inline-block transition-transform" href="#" style="">Membership</a></li>
+<li class="" style=""><a class="text-[#1b1c1a]/70 dark:text-[#fbf9f5]/70 hover:text-[#553c00] transition-colors duration-200 hover:translate-x-1 inline-block transition-transform" href="#" style="">Privacy Policy</a></li>
+</ul>
+</div>
+</div>
+</footer>
+</body></html>

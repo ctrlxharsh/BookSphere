@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Maulana Azad Library - Student Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&amp;family=Noto+Serif:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                            "surface-tint": "#0f6d39",
+                            "surface-dim": "#dbdad6",
+                            "error-container": "#ffdad6",
+                            "on-background": "#1b1c1a",
+                            "tertiary-container": "#705313",
+                            "primary-container": "#006633",
+                            "tertiary": "#553c00",
+                            "surface-container-lowest": "#ffffff",
+                            "secondary": "#46664d",
+                            "inverse-primary": "#84d999",
+                            "on-secondary-fixed-variant": "#2f4d36",
+                            "on-tertiary-fixed-variant": "#5d4201",
+                            "on-secondary-fixed": "#03210e",
+                            "on-surface": "#1b1c1a",
+                            "surface-variant": "#e4e2de",
+                            "on-tertiary": "#ffffff",
+                            "surface-container-highest": "#e4e2de",
+                            "on-secondary-container": "#4a6a51",
+                            "primary-fixed": "#9ff6b4",
+                            "on-tertiary-container": "#f1c97d",
+                            "primary": "#004b24",
+                            "surface-container": "#efeeea",
+                            "primary-fixed-dim": "#84d999",
+                            "on-primary": "#ffffff",
+                            "on-primary-container": "#8ce1a1",
+                            "outline": "#6f7a6f",
+                            "surface-bright": "#fbf9f5",
+                            "on-surface-variant": "#3f4940",
+                            "on-tertiary-fixed": "#261900",
+                            "surface-container-low": "#f5f3ef",
+                            "secondary-container": "#c5e9c9",
+                            "on-secondary": "#ffffff",
+                            "on-error-container": "#93000a",
+                            "on-primary-fixed": "#00210c",
+                            "secondary-fixed-dim": "#accfb1",
+                            "background": "#fbf9f5",
+                            "inverse-surface": "#30312e",
+                            "on-primary-fixed-variant": "#005228",
+                            "on-error": "#ffffff",
+                            "tertiary-fixed": "#ffdea5",
+                            "outline-variant": "#bfc9bd",
+                            "secondary-fixed": "#c8ebcc",
+                            "surface-container-high": "#eae8e4",
+                            "inverse-on-surface": "#f2f0ed",
+                            "error": "#ba1a1a",
+                            "surface": "#fbf9f5",
+                            "tertiary-fixed-dim": "#e9c176"
+                    },
+                    "borderRadius": {
+                            "DEFAULT": "0.125rem",
+                            "lg": "0.25rem",
+                            "xl": "0.5rem",
+                            "full": "0.75rem"
+                    },
+                    "spacing": {},
+                    "fontFamily": {
+                            "headline": ["Noto Serif"],
+                            "body": ["Manrope"],
+                            "label": ["Manrope"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .symbol-fill {
+            font-variation-settings: 'FILL' 1;
+        }
+        .arch-clip {
+            clip-path: path('M 0 0 Q 50 20 100 0 L 100 100 L 0 100 Z');
+        }
+        .glass-panel {
+            background: rgba(251, 249, 245, 0.8);
+            backdrop-filter: blur(20px);
+        }
+        .gradient-primary {
+            background: linear-gradient(135deg, #004b24, #006633);
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body antialiased selection:bg-primary-container selection:text-on-primary-container min-h-screen flex flex-col">
+<!-- TopNavBar -->
+<nav class="bg-[#fbf9f5]/90 backdrop-blur-[20px] dark:bg-[#1b1c1a]/90 docked full-width top-0 z-50 sticky transition-all duration-300">
+<div class="flex justify-between items-center w-full px-8 py-4 max-w-screen-2xl mx-auto">
+<div class="flex items-center gap-8">
+<a class="text-2xl font-bold text-[#004b24] font-['Noto_Serif'] tracking-tight" href="#">Maulana Azad Library</a>
+<div class="hidden md:flex gap-6 items-center">
+<a class="text-[#004b24] dark:text-[#006633] font-bold border-b-2 border-[#004b24] pb-1 font-['Noto_Serif'] text-on-surface tracking-tight hover:bg-[#eae8e4] dark:hover:bg-[#2d2e2c] transition-all duration-300" href="#">Home</a>
+<a class="text-on-surface-variant font-medium hover:text-[#004b24] transition-colors font-['Noto_Serif'] tracking-tight hover:bg-[#eae8e4] dark:hover:bg-[#2d2e2c] transition-all duration-300" href="#">Catalog</a>
+<a class="text-on-surface-variant font-medium hover:text-[#004b24] transition-colors font-['Noto_Serif'] tracking-tight hover:bg-[#eae8e4] dark:hover:bg-[#2d2e2c] transition-all duration-300" href="#">Research</a>
+<a class="text-on-surface-variant font-medium hover:text-[#004b24] transition-colors font-['Noto_Serif'] tracking-tight hover:bg-[#eae8e4] dark:hover:bg-[#2d2e2c] transition-all duration-300" href="#">About</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="hidden lg:flex items-center bg-surface-container-highest rounded-full px-4 py-2 hover:bg-[#eae8e4] dark:hover:bg-[#2d2e2c] transition-all duration-300">
+<input class="bg-transparent border-none outline-none text-on-surface placeholder:text-on-surface-variant text-sm w-48 focus:ring-0 font-body" placeholder="Search catalog..." type="text"/>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer">search</span>
+</div>
+<button class="flex items-center gap-2 text-[#004b24] hover:bg-[#eae8e4] dark:hover:bg-[#2d2e2c] transition-all duration-300 px-3 py-2 rounded-full">
+<span class="font-medium text-sm font-body">Login</span>
+<span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
+</button>
+</div>
+</div>
+<div class="bg-[#f5f3ef] dark:bg-[#2a2a28] h-[1px] w-full absolute bottom-0 opacity-15"></div>
+</nav>
+<!-- Main Dashboard Content -->
+<main class="flex-grow w-full max-w-screen-2xl mx-auto px-8 py-12 flex flex-col gap-12">
+<!-- Welcome Header -->
+<header class="flex justify-between items-end pb-8 border-b-[0.5px] border-outline-variant/15">
+<div>
+<p class="text-on-surface-variant font-label text-sm uppercase tracking-widest mb-2">Student Portal</p>
+<h1 class="font-headline text-display-lg text-primary leading-none tracking-tight">Welcome back, <br/>Aisha Khan</h1>
+</div>
+<div class="text-right flex flex-col items-end">
+<p class="font-body text-sm text-on-surface-variant mb-1">M.A. History, Year 2</p>
+<p class="font-body text-sm text-on-surface-variant">ID: 21HS402</p>
+</div>
+</header>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+<!-- Left Column: Primary Dashboard Data -->
+<div class="lg:col-span-8 flex flex-col gap-8">
+<!-- My Library: Issued Books -->
+<section>
+<div class="flex justify-between items-center mb-6">
+<h2 class="font-headline text-2xl text-on-surface">My Library</h2>
+<a class="font-body text-sm text-tertiary hover:underline decoration-1 underline-offset-4" href="#">View History</a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<!-- Book Card 1 -->
+<div class="bg-surface-container-low rounded-lg p-6 group relative overflow-hidden transition-transform duration-300 hover:scale-[1.02]">
+<div class="flex gap-4">
+<div class="w-20 h-28 bg-surface-container-highest rounded-md overflow-hidden shrink-0">
+<img alt="Book Cover" class="w-full h-full object-cover" data-alt="vintage leather bound book with gold embossing on dark wood table" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCx2yePR64Y0NBDNsCivTpZBvu_SgRivHHjh0a9eiGQ3F-7m4PW473-LVnr9JLYtXTm2XGgFldKzD7TOwh4IIFGV9_RBLokbMG73ruUw_rtb-u47Q0VfOtT_ieD-RILoRdw3anlwsVAIp3LVxZP3H__Mr1lOntoRNG0VgaGtEG_3xEnZRLfJh2A4vmIYa3IOxRZqRQ3grfgNyOO5J_d36qeAFH57kjZ-jBld1yuTORfNQQIQn8jS5tgXg8l36IVKsFn1YDN_rUhkd8"/>
+</div>
+<div class="flex flex-col justify-between">
+<div>
+<p class="font-label text-xs text-on-surface-variant uppercase tracking-wider mb-1">Issued</p>
+<h3 class="font-headline text-lg text-on-surface leading-tight mb-1">The Discovery of India</h3>
+<p class="font-body text-sm text-on-surface-variant">Jawaharlal Nehru</p>
+</div>
+<div class="mt-4 flex items-center justify-between">
+<div class="flex items-center gap-2 text-error">
+<span class="material-symbols-outlined text-sm">schedule</span>
+<span class="font-body text-sm font-medium">Due in 2 days</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Hover Action Overlay -->
+<div class="absolute bottom-0 left-0 w-full glass-panel p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] flex justify-end gap-3 border-t-[0.5px] border-outline-variant/15">
+<button class="font-body text-sm text-on-surface hover:text-primary transition-colors px-4 py-2">Details</button>
+<button class="font-body text-sm text-primary-container bg-secondary-container hover:bg-secondary-fixed transition-colors px-4 py-2 rounded-full font-medium">Renew</button>
+</div>
+</div>
+<!-- Book Card 2 -->
+<div class="bg-surface-container-low rounded-lg p-6 group relative overflow-hidden transition-transform duration-300 hover:scale-[1.02]">
+<div class="flex gap-4">
+<div class="w-20 h-28 bg-surface-container-highest rounded-md overflow-hidden shrink-0">
+<img alt="Book Cover" class="w-full h-full object-cover" data-alt="abstract geometric book cover design in muted earth tones" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAVi8gEpE9beDfGbplhGH9D4C6BCoTh9E22Xzpak17KrKamORq789lkDDWB1b6CyqCso62xGE9L06w3z7vEmPaKUW6smnzPHvAfkjYG1hEL7jRmbVRe9sdGrKVZBtF0Ut4Vf4FfhHgZJBXVFNHAKL11CAsfxkTISv9oizUZ6a5pjDObUTEsku7GL6BO2g0rRK3HUgxFS_09-G0a7o8melTS79mUyVBNKiRWYe4lMmAU-IhsXZxf_jLSnN4usznta1sMAjDOT7iZxmM"/>
+</div>
+<div class="flex flex-col justify-between">
+<div>
+<p class="font-label text-xs text-on-surface-variant uppercase tracking-wider mb-1">Issued</p>
+<h3 class="font-headline text-lg text-on-surface leading-tight mb-1">Mughal Architecture</h3>
+<p class="font-body text-sm text-on-surface-variant">Ebba Koch</p>
+</div>
+<div class="mt-4 flex items-center justify-between">
+<div class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-sm">event</span>
+<span class="font-body text-sm">Due Nov 15</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Hover Action Overlay -->
+<div class="absolute bottom-0 left-0 w-full glass-panel p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] flex justify-end gap-3 border-t-[0.5px] border-outline-variant/15">
+<button class="font-body text-sm text-on-surface hover:text-primary transition-colors px-4 py-2">Details</button>
+<button class="font-body text-sm text-primary-container bg-secondary-container hover:bg-secondary-fixed transition-colors px-4 py-2 rounded-full font-medium">Renew</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Reserved Items -->
+<section class="mt-4">
+<h2 class="font-headline text-xl text-on-surface mb-4">Reserved Items</h2>
+<div class="bg-surface-container-low rounded-lg p-5 flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-primary-container/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined symbol-fill">local_library</span>
+</div>
+<div>
+<h4 class="font-headline text-md text-on-surface">Tarikh-i-Firoz Shahi</h4>
+<p class="font-body text-sm text-on-surface-variant">Available for pickup at Main Desk</p>
+</div>
+</div>
+<span class="px-3 py-1 bg-tertiary-container/20 text-tertiary rounded-full font-label text-xs font-semibold">Hold expires in 24h</span>
+</div>
+</section>
+</div>
+<!-- Right Column: Secondary Widgets & AI -->
+<div class="lg:col-span-4 flex flex-col gap-8">
+<!-- Research Corner (Shodhganga) -->
+<section class="bg-surface-container-highest rounded-xl p-6">
+<div class="flex items-center gap-2 mb-6">
+<span class="material-symbols-outlined text-primary">bookmark</span>
+<h3 class="font-headline text-lg text-on-surface">Research Corner</h3>
+</div>
+<div class="flex flex-col gap-4">
+<div class="group cursor-pointer">
+<p class="font-label text-xs text-on-surface-variant mb-1">Shodhganga Thesis</p>
+<h4 class="font-body font-medium text-on-surface group-hover:text-primary transition-colors line-clamp-2">Socio-Economic Conditions during the Delhi Sultanate</h4>
+<div class="h-[1px] w-full bg-outline-variant/15 mt-3"></div>
+</div>
+<div class="group cursor-pointer">
+<p class="font-label text-xs text-on-surface-variant mb-1">Saved Manuscript</p>
+<h4 class="font-body font-medium text-on-surface group-hover:text-primary transition-colors line-clamp-2">Baburnama (Persian Translation Fragment)</h4>
+<div class="h-[1px] w-full bg-outline-variant/15 mt-3"></div>
+</div>
+<div class="group cursor-pointer">
+<p class="font-label text-xs text-on-surface-variant mb-1">Digital Collection</p>
+<h4 class="font-body font-medium text-on-surface group-hover:text-primary transition-colors line-clamp-2">Aligarh Movement Archival Letters</h4>
+</div>
+</div>
+<button class="w-full mt-6 py-3 font-body text-sm text-tertiary bg-surface-container-low rounded-full hover:bg-surface-container-high transition-colors font-medium">View All Saved Items</button>
+</section>
+<!-- Library AI Concierge -->
+<section class="bg-surface-container-lowest rounded-xl p-1 border-[0.5px] border-outline-variant/15 shadow-[0_8px_40px_-12px_rgba(27,28,26,0.06)] flex flex-col h-full min-h-[300px]">
+<div class="gradient-primary rounded-t-lg p-4 text-on-primary flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined">smart_toy</span>
+<h3 class="font-body font-semibold">Archivist AI</h3>
+</div>
+<span class="w-2 h-2 rounded-full bg-primary-fixed animate-pulse"></span>
+</div>
+<div class="p-4 flex-grow flex flex-col gap-3 overflow-y-auto bg-surface-bright">
+<div class="self-start bg-surface-container-low p-3 rounded-2xl rounded-tl-sm max-w-[85%]">
+<p class="font-body text-sm text-on-surface">Hello Aisha. How can I assist your research today?</p>
+</div>
+</div>
+<div class="p-3 bg-surface border-t-[0.5px] border-outline-variant/15 rounded-b-lg flex items-center gap-2">
+<input class="flex-grow bg-surface-container-low border-none rounded-full px-4 py-2 text-sm font-body focus:ring-1 focus:ring-primary outline-none" placeholder="Ask about archives, sources..." type="text"/>
+<button class="w-8 h-8 rounded-full bg-primary-container text-on-primary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-sm">send</span>
+</button>
+</div>
+</section>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-[#f5f3ef] dark:bg-[#1b1c1a] w-full py-16 px-12 border-t-[0.5px] border-[#004b24]/10 mt-auto">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-12 max-w-screen-2xl mx-auto">
+<div>
+<span class="font-['Noto_Serif'] text-xl font-bold text-[#004b24] mb-4 block">Maulana Azad Library</span>
+<p class="font-['Manrope'] text-sm tracking-wide text-[#004b24] dark:text-[#006633]">© 2024 Maulana Azad Library, Aligarh Muslim University. Digital Archivist Division.</p>
+</div>
+<div class="flex flex-col gap-3">
+<a class="font-['Manrope'] text-sm tracking-wide text-[#1b1c1a]/70 dark:text-[#fbf9f5]/70 hover:text-[#553c00] transition-colors duration-200 hover:translate-x-1 transition-transform" href="#">Archives</a>
+<a class="font-['Manrope'] text-sm tracking-wide text-[#1b1c1a]/70 dark:text-[#fbf9f5]/70 hover:text-[#553c00] transition-colors duration-200 hover:translate-x-1 transition-transform" href="#">Digital Collections</a>
+</div>
+<div class="flex flex-col gap-3">
+<a class="font-['Manrope'] text-sm tracking-wide text-[#1b1c1a]/70 dark:text-[#fbf9f5]/70 hover:text-[#553c00] transition-colors duration-200 hover:translate-x-1 transition-transform" href="#">Membership</a>
+<a class="font-['Manrope'] text-sm tracking-wide text-[#1b1c1a]/70 dark:text-[#fbf9f5]/70 hover:text-[#553c00] transition-colors duration-200 hover:translate-x-1 transition-transform" href="#">Institutional Repository</a>
+</div>
+<div class="flex flex-col gap-3">
+<a class="font-['Manrope'] text-sm tracking-wide text-[#1b1c1a]/70 dark:text-[#fbf9f5]/70 hover:text-[#553c00] transition-colors duration-200 hover:translate-x-1 transition-transform" href="#">Privacy Policy</a>
+</div>
+</div>
+</footer>
+</body></html>

@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Research - Maulana Azad Library</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&amp;family=Noto+Serif:ital,wght@0,400;0,700;1,400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-background": "#1b1c1a",
+                        "background": "#fbf9f5",
+                        "surface-container-high": "#eae8e4",
+                        "inverse-primary": "#84d999",
+                        "outline-variant": "#bfc9bd",
+                        "on-tertiary-fixed-variant": "#5d4201",
+                        "on-error": "#ffffff",
+                        "on-tertiary-fixed": "#261900",
+                        "secondary": "#46664d",
+                        "secondary-fixed": "#c8ebcc",
+                        "on-primary-fixed": "#00210c",
+                        "surface-container": "#efeeea",
+                        "secondary-container": "#c5e9c9",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-highest": "#e4e2de",
+                        "on-secondary-fixed": "#03210e",
+                        "surface-container-low": "#f5f3ef",
+                        "surface-dim": "#dbdad6",
+                        "on-surface-variant": "#3f4940",
+                        "primary-fixed": "#9ff6b4",
+                        "on-primary-container": "#8ce1a1",
+                        "tertiary-fixed": "#ffdea5",
+                        "on-primary-fixed-variant": "#005228",
+                        "inverse-surface": "#30312e",
+                        "on-secondary": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary-container": "#4a6a51",
+                        "primary-container": "#006633",
+                        "tertiary": "#553c00",
+                        "on-error-container": "#93000a",
+                        "outline": "#6f7a6f",
+                        "on-surface": "#1b1c1a",
+                        "surface": "#fbf9f5",
+                        "error-container": "#ffdad6",
+                        "tertiary-fixed-dim": "#e9c176",
+                        "secondary-fixed-dim": "#accfb1",
+                        "on-secondary-fixed-variant": "#2f4d36",
+                        "inverse-on-surface": "#f2f0ed",
+                        "surface-tint": "#0f6d39",
+                        "on-tertiary-container": "#f1c97d",
+                        "primary-fixed-dim": "#84d999",
+                        "on-primary": "#ffffff",
+                        "error": "#ba1a1a",
+                        "surface-bright": "#fbf9f5",
+                        "tertiary-container": "#705313",
+                        "surface-variant": "#e4e2de",
+                        "primary": "#004b24"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["Noto Serif", "serif"],
+                        "body": ["Manrope", "sans-serif"],
+                        "label": ["Manrope", "sans-serif"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .arch-clip {
+            clip-path: path('M 0,100 Q 50,0 100,100 L 100,200 L 0,200 Z');
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body min-h-screen flex flex-col antialiased">
+<!-- TopNavBar (Shared Component) -->
+<nav class="bg-surface/80 backdrop-blur-md dark:bg-stone-900/80 font-serif text-lg tracking-wide fixed top-0 w-full z-50 shadow-xl shadow-stone-900/5 transition-colors duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] flex justify-between items-center px-12 py-6 max-w-full">
+<div class="font-serif text-2xl font-bold text-emerald-900 dark:text-emerald-500">
+            Maulana Azad Library
+        </div>
+<div class="hidden md:flex gap-8 items-center">
+<a class="text-stone-600 hover:text-emerald-800 dark:text-stone-400 hover:text-emerald-700 transition-colors duration-300" href="#">Home</a>
+<a class="text-emerald-900 border-b-2 border-emerald-900 dark:text-emerald-400 dark:border-emerald-400 pb-1 hover:text-emerald-700 transition-colors duration-300" href="#">Research</a>
+<a class="text-stone-600 hover:text-emerald-800 dark:text-stone-400 hover:text-emerald-700 transition-colors duration-300" href="#">Collections</a>
+<a class="text-stone-600 hover:text-emerald-800 dark:text-stone-400 hover:text-emerald-700 transition-colors duration-300" href="#">Digital Archive</a>
+<a class="text-stone-600 hover:text-emerald-800 dark:text-stone-400 hover:text-emerald-700 transition-colors duration-300" href="#">About</a>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex gap-4">
+<button class="text-emerald-900 dark:text-emerald-500 hover:text-emerald-700 transition-colors duration-300 flex items-center justify-center">
+<span class="material-symbols-outlined">language</span>
+</button>
+<button class="text-emerald-900 dark:text-emerald-500 hover:text-emerald-700 transition-colors duration-300 flex items-center justify-center">
+<span class="material-symbols-outlined">search</span>
+</button>
+</div>
+<button class="bg-primary text-on-primary font-label text-sm font-semibold py-2 px-6 rounded-full hover:opacity-90 transition-opacity">
+                Sign In
+            </button>
+</div>
+</nav>
+<!-- Main Canvas -->
+<main class="flex-grow pt-32 pb-24 px-6 md:px-12 lg:px-24">
+<!-- Hero Section -->
+<header class="mb-20 text-center max-w-4xl mx-auto">
+<h1 class="font-headline text-5xl md:text-6xl lg:text-[4rem] text-primary mb-6 leading-tight tracking-wide">
+                Scholarly Pursuits &amp;<br/>Digital Archives
+            </h1>
+<p class="font-body text-xl text-on-surface-variant max-w-2xl mx-auto mb-10 leading-relaxed">
+                Empowering academic discovery through comprehensive digital repositories and specialized librarian support.
+            </p>
+<!-- Research Search Bar -->
+<div class="relative max-w-3xl mx-auto bg-surface-container-lowest rounded-full shadow-[0_8px_30px_rgb(27,28,26,0.06)] border border-outline-variant/15 flex items-center p-2 focus-within:ring-2 focus-within:ring-primary/20 transition-all">
+<span class="material-symbols-outlined text-primary ml-4 opacity-50">search</span>
+<input class="w-full bg-transparent border-none text-on-surface font-body text-lg focus:ring-0 px-4 py-3 placeholder-on-surface-variant/50" placeholder="Search specialized databases, theses, or journals..." type="text"/>
+<button class="bg-gradient-to-br from-primary to-primary-container text-on-primary rounded-full px-8 py-3 font-label font-semibold hover:opacity-90 transition-opacity">
+                    Explore
+                </button>
+</div>
+</header>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-6 lg:gap-8 max-w-7xl mx-auto">
+<!-- Digital Resources (Large Block) -->
+<div class="md:col-span-8 bg-surface-container-low rounded-xl p-8 lg:p-12 relative overflow-hidden group hover:scale-[1.01] transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] border border-outline-variant/15 flex flex-col justify-between min-h-[400px]">
+<div class="relative z-10">
+<div class="flex items-center gap-3 mb-6">
+<span class="material-symbols-outlined text-tertiary text-3xl">database</span>
+<h2 class="font-headline text-3xl text-on-surface">Digital Resources</h2>
+</div>
+<p class="font-body text-on-surface-variant text-lg mb-8 max-w-md">Access premium academic databases, institutional repositories, and national scholarly networks.</p>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+<div class="flex items-start gap-4">
+<span class="material-symbols-outlined text-primary mt-1">book_4</span>
+<div>
+<h3 class="font-headline text-xl text-primary font-bold mb-1">Shodhganga</h3>
+<p class="font-body text-on-surface-variant text-sm">Reservoir of Indian Theses</p>
+</div>
+</div>
+<div class="flex items-start gap-4">
+<span class="material-symbols-outlined text-primary mt-1">menu_book</span>
+<div>
+<h3 class="font-headline text-xl text-primary font-bold mb-1">e-ShodhSindhu</h3>
+<p class="font-body text-on-surface-variant text-sm">Consortium for Higher Education</p>
+</div>
+</div>
+<div class="flex items-start gap-4">
+<span class="material-symbols-outlined text-primary mt-1">account_balance</span>
+<div>
+<h3 class="font-headline text-xl text-primary font-bold mb-1">Institutional Repository</h3>
+<p class="font-body text-on-surface-variant text-sm">AMU's scholarly output</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Decorative Arch Image -->
+<div class="absolute bottom-0 right-0 w-1/2 h-full opacity-20 pointer-events-none mix-blend-multiply">
+<img alt="Library interior" class="w-full h-full object-cover object-left mask-image: linear-gradient(to right, transparent, black);" data-alt="interior of historic library with tall bookshelves and glowing reading lamps, soft warm light, sepia tones" src="https://lh3.googleusercontent.com/aida-public/AB6AXuABRrqflFTRH7qji6wdbetUgacwqlFAo3n56PfOGNLXe_SNYgsMx-CHEnE_6XD-NDs-UULfzk2p8mx0myK4j5NFJ1VTg0CGsRR6FB1vJ7-f5ZPCuoSk9hs5uY7tocbO1AKkmY50udX7qhsZsWTnG2ccgHri_1Rqzu3wfVQD5RDyTvsoT9SsZvhVKPAtF68q0Csm9eu7ycVE3ZoB4-K6PV9hCuSghtb4wOHkId3e4tEFTj6EMtWLYVTTzObV6AwxcOGx-Go_nEVfAic"/>
+</div>
+</div>
+<!-- Research Support (Tall Block) -->
+<div class="md:col-span-4 bg-surface-container-highest rounded-xl p-8 flex flex-col justify-between relative overflow-hidden group border border-outline-variant/15 hover:shadow-[0_40px_80px_rgb(27,28,26,0.06)] transition-all duration-500 min-h-[400px]">
+<div>
+<div class="bg-primary/10 w-12 h-12 rounded-full flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-primary text-2xl" data-weight="fill">smart_toy</span>
+</div>
+<h2 class="font-headline text-2xl text-on-surface mb-4">Research Support</h2>
+<p class="font-body text-on-surface-variant mb-6 leading-relaxed">
+                        Navigate complex academic inquiries with dedicated tools and expert guidance.
+                    </p>
+</div>
+<div class="space-y-4">
+<button class="w-full bg-surface-container-low text-tertiary font-label font-semibold py-4 px-6 rounded-lg flex justify-between items-center hover:bg-surface-dim transition-colors group">
+                        Consult Archivist AI
+                        <span class="material-symbols-outlined transform group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+<button class="w-full border border-outline-variant/30 text-on-surface font-label font-semibold py-4 px-6 rounded-lg flex justify-between items-center hover:bg-surface-container-low transition-colors group">
+                        Librarian Assistance
+                        <span class="material-symbols-outlined transform group-hover:translate-x-1 transition-transform">person_search</span>
+</button>
+</div>
+</div>
+<!-- Collections: Journals -->
+<div class="md:col-span-4 bg-surface rounded-xl p-8 border border-outline-variant/15 hover:-translate-y-1 transition-transform duration-300 shadow-[0_10px_30px_rgb(27,28,26,0.03)] flex flex-col">
+<span class="material-symbols-outlined text-secondary text-3xl mb-4">article</span>
+<h3 class="font-headline text-xl text-on-surface mb-2">Academic Journals</h3>
+<p class="font-body text-on-surface-variant text-sm mb-6 flex-grow">Access thousands of peer-reviewed journals across disciplines, updated daily.</p>
+<a class="font-label text-primary font-bold text-sm uppercase tracking-wider hover:text-primary-container transition-colors flex items-center gap-2" href="#">
+                    Browse Journals <span class="material-symbols-outlined text-sm">east</span>
+</a>
+</div>
+<!-- Collections: Papers -->
+<div class="md:col-span-4 bg-surface-container-low rounded-xl p-8 border border-outline-variant/15 hover:-translate-y-1 transition-transform duration-300 flex flex-col">
+<span class="material-symbols-outlined text-secondary text-3xl mb-4">description</span>
+<h3 class="font-headline text-xl text-on-surface mb-2">Research Papers</h3>
+<p class="font-body text-on-surface-variant text-sm mb-6 flex-grow">Explore faculty publications, pre-prints, and collaborative research outputs.</p>
+<a class="font-label text-primary font-bold text-sm uppercase tracking-wider hover:text-primary-container transition-colors flex items-center gap-2" href="#">
+                    View Papers <span class="material-symbols-outlined text-sm">east</span>
+</a>
+</div>
+<!-- Collections: Theses -->
+<div class="md:col-span-4 bg-surface rounded-xl p-8 border border-outline-variant/15 hover:-translate-y-1 transition-transform duration-300 shadow-[0_10px_30px_rgb(27,28,26,0.03)] flex flex-col relative overflow-hidden">
+<span class="material-symbols-outlined text-secondary text-3xl mb-4 relative z-10">school</span>
+<h3 class="font-headline text-xl text-on-surface mb-2 relative z-10">Doctoral Theses</h3>
+<p class="font-body text-on-surface-variant text-sm mb-6 flex-grow relative z-10">A century of AMU's academic legacy, digitized and preserved for the future.</p>
+<a class="font-label text-primary font-bold text-sm uppercase tracking-wider hover:text-primary-container transition-colors flex items-center gap-2 relative z-10" href="#">
+                    Search Archive <span class="material-symbols-outlined text-sm">east</span>
+</a>
+</div>
+</div>
+</main>
+<!-- Footer (Shared Component) -->
+<footer class="bg-emerald-950 dark:bg-black font-sans text-sm tracking-tight text-stone-300 w-full mt-auto rounded-t-3xl tonal-shift fade-in-up duration-700 flex flex-col md:flex-row justify-between items-center px-12 py-16 w-full gap-8">
+<div class="flex flex-col gap-4 items-center md:items-start">
+<div class="font-serif text-xl text-amber-500">Maulana Azad Library</div>
+<div>© 2026 Maulana Azad Library, Aligarh Muslim University. All Rights Reserved.</div>
+</div>
+<div class="flex flex-wrap justify-center gap-6">
+<a class="text-stone-400 hover:text-white transition-opacity" href="#">Privacy Policy</a>
+<a class="text-stone-400 hover:text-white transition-opacity" href="#">Terms of Service</a>
+<a class="text-stone-400 hover:text-white transition-opacity" href="#">Contact Us</a>
+<a class="text-stone-400 hover:text-white transition-opacity" href="#">Library Maps</a>
+</div>
+</footer>
+</body></html>

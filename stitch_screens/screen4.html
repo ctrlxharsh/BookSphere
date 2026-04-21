@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Maulana Azad Library - Librarian Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&amp;family=Noto+Serif:ital,wght@0,400;0,700;1,400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-tint": "#0f6d39",
+                        "surface-dim": "#dbdad6",
+                        "error-container": "#ffdad6",
+                        "on-background": "#1b1c1a",
+                        "tertiary-container": "#705313",
+                        "primary-container": "#006633",
+                        "tertiary": "#553c00",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary": "#46664d",
+                        "inverse-primary": "#84d999",
+                        "on-secondary-fixed-variant": "#2f4d36",
+                        "on-tertiary-fixed-variant": "#5d4201",
+                        "on-secondary-fixed": "#03210e",
+                        "on-surface": "#1b1c1a",
+                        "surface-variant": "#e4e2de",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-highest": "#e4e2de",
+                        "on-secondary-container": "#4a6a51",
+                        "primary-fixed": "#9ff6b4",
+                        "on-tertiary-container": "#f1c97d",
+                        "primary": "#004b24",
+                        "surface-container": "#efeeea",
+                        "primary-fixed-dim": "#84d999",
+                        "on-primary": "#ffffff",
+                        "on-primary-container": "#8ce1a1",
+                        "outline": "#6f7a6f",
+                        "surface-bright": "#fbf9f5",
+                        "on-surface-variant": "#3f4940",
+                        "on-tertiary-fixed": "#261900",
+                        "surface-container-low": "#f5f3ef",
+                        "secondary-container": "#c5e9c9",
+                        "on-secondary": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "on-primary-fixed": "#00210c",
+                        "secondary-fixed-dim": "#accfb1",
+                        "background": "#fbf9f5",
+                        "inverse-surface": "#30312e",
+                        "on-primary-fixed-variant": "#005228",
+                        "on-error": "#ffffff",
+                        "tertiary-fixed": "#ffdea5",
+                        "outline-variant": "#bfc9bd",
+                        "secondary-fixed": "#c8ebcc",
+                        "surface-container-high": "#eae8e4",
+                        "inverse-on-surface": "#f2f0ed",
+                        "error": "#ba1a1a",
+                        "surface": "#fbf9f5",
+                        "tertiary-fixed-dim": "#e9c176"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["Noto Serif", "serif"],
+                        "body": ["Manrope", "sans-serif"],
+                        "label": ["Manrope", "sans-serif"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .arch-clip {
+            clip-path: polygon(0 0, 100% 0, 100% 80%, 50% 100%, 0 80%);
+        }
+        .arch-top {
+            border-top-left-radius: 50% 20%;
+            border-top-right-radius: 50% 20%;
+        }
+        /* Hide scrollbar for cleaner UI */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #bfc9bd;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body h-screen overflow-hidden flex">
+<!-- Sidebar Navigation -->
+<aside class="w-64 bg-surface-container-low flex flex-col h-full shrink-0 shadow-[40px_0_40px_rgba(27,28,26,0.02)] z-10">
+<div class="p-8 pb-12 flex flex-col items-center">
+<span class="material-symbols-outlined text-primary text-4xl mb-4" style="font-variation-settings: 'FILL' 1;">local_library</span>
+<h1 class="font-headline font-bold text-xl text-primary text-center leading-tight">Maulana Azad<br/>Library</h1>
+<p class="font-label text-xs text-on-surface-variant mt-2 tracking-wide uppercase">Librarian Portal</p>
+</div>
+<nav class="flex-1 px-4 space-y-2">
+<a class="flex items-center space-x-3 px-4 py-3 rounded-lg bg-primary-container text-on-primary-container transition-all" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+<span class="font-label font-semibold text-sm">Dashboard</span>
+</a>
+<a class="flex items-center space-x-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined">menu_book</span>
+<span class="font-label font-medium text-sm">Catalog Management</span>
+</a>
+<a class="flex items-center space-x-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined">how_to_reg</span>
+<span class="font-label font-medium text-sm">User Requests</span>
+</a>
+<a class="flex items-center space-x-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined">bar_chart</span>
+<span class="font-label font-medium text-sm">Reports</span>
+</a>
+<a class="flex items-center space-x-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label font-medium text-sm">Settings</span>
+</a>
+</nav>
+<div class="p-6 border-t border-outline-variant/15 mt-auto">
+<div class="flex items-center space-x-3">
+<img alt="Librarian Profile" class="w-10 h-10 rounded-full object-cover border border-outline-variant/30" data-alt="Portrait of a professional man with glasses in a library setting, warm lighting, scholarly mood" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBu5sO1WJLnoLYI6Uv0aGX-8QvLKeZQcS00pkIR5AM6nVulQBcQbvSKiGb3V6P_hCGNFvQKxsDr4-6TDIblYWjk77l4xtxawYOJ0ApMCUz3BFQ1MmquYWdVS06_4XWKHXyi-lY3A5PZvnHj3iUOgdnjX8bsT9ZThQv5avO4UXV19q9Kz3KpkGN8d62ju3yjRDxzmF-n7uTo1-361oAPJBwxXL_mfyUOEaHUvr7ISR-Q6fB3zB_Q6CCATDua8egbi0N4ZObm6nbs0ko"/>
+<div>
+<p class="font-label font-semibold text-sm text-on-surface">Dr. A. Rahman</p>
+<p class="font-label text-xs text-on-surface-variant">Chief Librarian</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="flex-1 h-full overflow-y-auto bg-surface relative p-8 lg:p-12">
+<!-- Top Bar -->
+<header class="flex justify-between items-end mb-12">
+<div>
+<p class="font-label text-sm text-on-surface-variant mb-1">Today is October 24, 2024</p>
+<h2 class="font-headline text-4xl text-on-surface font-bold tracking-tight">Overview</h2>
+</div>
+<div class="flex items-center space-x-4">
+<div class="relative w-64">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant/70 text-sm">search</span>
+<input class="w-full bg-surface-container-lowest border border-outline-variant/30 rounded-full py-2 pl-9 pr-4 text-sm font-label focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary placeholder-on-surface-variant/50 transition-all shadow-[0_4px_20px_rgba(27,28,26,0.02)]" placeholder="Search catalog or users..." type="text"/>
+</div>
+<button class="w-10 h-10 rounded-full bg-surface-container-low flex items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-colors relative shadow-[0_4px_20px_rgba(27,28,26,0.02)]">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full"></span>
+</button>
+</div>
+</header>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 max-w-[1400px]">
+<!-- Stats Row (Spans full width above the split) -->
+<div class="lg:col-span-12 grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Stat Card 1 -->
+<div class="bg-surface-container-low rounded-xl p-6 relative overflow-hidden group hover:scale-[1.02] transition-transform duration-300">
+<div class="absolute top-0 right-0 w-24 h-24 bg-primary/5 rounded-full -translate-y-1/2 translate-x-1/2"></div>
+<div class="flex justify-between items-start mb-4">
+<div class="w-10 h-10 rounded-lg bg-primary-container text-on-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">book</span>
+</div>
+<span class="font-label text-xs font-semibold text-primary bg-primary/10 px-2 py-1 rounded-full">+12% vs yday</span>
+</div>
+<h3 class="font-headline text-3xl font-bold text-on-surface mb-1">342</h3>
+<p class="font-label text-sm text-on-surface-variant">Total Books Issued Today</p>
+</div>
+<!-- Stat Card 2 -->
+<div class="bg-surface-container-low rounded-xl p-6 relative overflow-hidden group hover:scale-[1.02] transition-transform duration-300">
+<div class="absolute top-0 right-0 w-24 h-24 bg-tertiary/5 rounded-full -translate-y-1/2 translate-x-1/2"></div>
+<div class="flex justify-between items-start mb-4">
+<div class="w-10 h-10 rounded-lg bg-tertiary-container text-on-tertiary-container flex items-center justify-center">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">pending_actions</span>
+</div>
+<span class="font-label text-xs font-semibold text-error bg-error/10 px-2 py-1 rounded-full">Requires Attention</span>
+</div>
+<h3 class="font-headline text-3xl font-bold text-on-surface mb-1">47</h3>
+<p class="font-label text-sm text-on-surface-variant">Pending Book Requests</p>
+</div>
+<!-- Stat Card 3 -->
+<div class="bg-surface-container-low rounded-xl p-6 relative overflow-hidden group hover:scale-[1.02] transition-transform duration-300">
+<div class="absolute top-0 right-0 w-24 h-24 bg-secondary/5 rounded-full -translate-y-1/2 translate-x-1/2"></div>
+<div class="flex justify-between items-start mb-4">
+<div class="w-10 h-10 rounded-lg bg-secondary-container text-on-secondary-container flex items-center justify-center">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">person_add</span>
+</div>
+<span class="font-label text-xs font-semibold text-secondary bg-secondary/10 px-2 py-1 rounded-full">+5 this week</span>
+</div>
+<h3 class="font-headline text-3xl font-bold text-on-surface mb-1">18</h3>
+<p class="font-label text-sm text-on-surface-variant">New Member Registrations</p>
+</div>
+</div>
+<!-- Left Column: Activity & Charts -->
+<div class="lg:col-span-8 space-y-8">
+<!-- Recent Activity Feed -->
+<div class="bg-surface-container-lowest rounded-xl p-8 shadow-[0_10px_40px_rgba(27,28,26,0.02)]">
+<div class="flex justify-between items-center mb-6">
+<h3 class="font-headline text-xl font-bold text-on-surface">Recent Activity</h3>
+<button class="font-label text-sm text-primary hover:text-primary-container transition-colors">View All</button>
+</div>
+<div class="space-y-6">
+<!-- Activity Item 1 -->
+<div class="flex items-start space-x-4">
+<div class="w-8 h-8 rounded-full bg-surface-container-low flex items-center justify-center shrink-0 mt-1">
+<span class="material-symbols-outlined text-sm text-on-surface-variant">history_edu</span>
+</div>
+<div class="flex-1 pb-6 border-b border-outline-variant/15">
+<p class="font-label text-sm text-on-surface">Rare manuscript <span class="font-semibold">"Tarikh-i-Firoz Shahi"</span> digitization completed.</p>
+<p class="font-label text-xs text-on-surface-variant mt-1">Digital Archives Div. • 10 mins ago</p>
+</div>
+</div>
+<!-- Activity Item 2 -->
+<div class="flex items-start space-x-4">
+<div class="w-8 h-8 rounded-full bg-surface-container-low flex items-center justify-center shrink-0 mt-1">
+<span class="material-symbols-outlined text-sm text-primary">assignment_return</span>
+</div>
+<div class="flex-1 pb-6 border-b border-outline-variant/15">
+<p class="font-label text-sm text-on-surface">Batch return processed for <span class="font-semibold">Faculty of Arts</span>.</p>
+<p class="font-label text-xs text-on-surface-variant mt-1">Circulation Desk • 45 mins ago</p>
+</div>
+</div>
+<!-- Activity Item 3 -->
+<div class="flex items-start space-x-4">
+<div class="w-8 h-8 rounded-full bg-error-container flex items-center justify-center shrink-0 mt-1">
+<span class="material-symbols-outlined text-sm text-on-error-container">warning</span>
+</div>
+<div class="flex-1 pb-2">
+<p class="font-label text-sm text-on-surface">Overdue notice escalated for <span class="font-semibold">ID: 994821</span>.</p>
+<p class="font-label text-xs text-on-surface-variant mt-1">System Auto • 2 hours ago</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Quick Actions & Context -->
+<div class="lg:col-span-4 space-y-8">
+<!-- Quick Actions Panel -->
+<div class="bg-surface-container-low rounded-xl overflow-hidden shadow-[0_10px_40px_rgba(27,28,26,0.02)]">
+<div class="bg-surface-container-highest p-6 arch-top relative overflow-hidden">
+<div class="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/arabesque.png')] pointer-events-none"></div>
+<h3 class="font-headline text-lg font-bold text-on-surface relative z-10">Quick Actions</h3>
+</div>
+<div class="p-6 space-y-3">
+<button class="w-full flex items-center space-x-3 p-3 rounded-lg bg-surface hover:bg-surface-container-high transition-colors text-left border border-outline-variant/15 shadow-sm">
+<span class="material-symbols-outlined text-primary">add_circle</span>
+<span class="font-label text-sm font-medium text-on-surface">Add New Book</span>
+</button>
+<button class="w-full flex items-center space-x-3 p-3 rounded-lg bg-surface hover:bg-surface-container-high transition-colors text-left border border-outline-variant/15 shadow-sm">
+<span class="material-symbols-outlined text-tertiary">payments</span>
+<span class="font-label text-sm font-medium text-on-surface">Manage Fines</span>
+</button>
+<button class="w-full flex items-center space-x-3 p-3 rounded-lg bg-surface hover:bg-surface-container-high transition-colors text-left border border-outline-variant/15 shadow-sm">
+<span class="material-symbols-outlined text-secondary">health_and_safety</span>
+<span class="font-label text-sm font-medium text-on-surface">System Health</span>
+</button>
+</div>
+</div>
+<!-- Featured Image Context -->
+<div class="rounded-xl overflow-hidden relative shadow-[0_10px_40px_rgba(27,28,26,0.06)] group h-64">
+<img alt="Library Books" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="Close up of antique books lined up on a dark wooden shelf, moody lighting, dust motes visible, high quality photography" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDU58GAR2JiduYJnjTS5s8Hb8nagFVs2CCJGfIrH4J_9p4zYB-xy9jKbCGl5Ha0z4yX0-TDWNphv-t0RJyCogG-w0r2kamW_8SSuIVPzZyqD1yLerGQD-2o12q2F4_ISmyNu0M8NAdhwoA_ACbVQaA-dMTj7IpA_rkdCA6Rk8eyy0Qp8zhSBA4JXsO1WHeKVs-cQb53j_E8CP7McVtwCoC6xkblsdYDMGRqoJ3YjKWG39otni4md-gjuSD_6I1-FGVNND1YiCtpTFs"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
+<div class="absolute bottom-0 left-0 p-6 w-full">
+<span class="font-label text-xs uppercase tracking-wider text-surface-dim mb-1 block">Collection Focus</span>
+<h4 class="font-headline text-lg font-bold text-surface-container-lowest">Preservation Efforts</h4>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>
